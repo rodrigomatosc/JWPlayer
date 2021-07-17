@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-		5E555C0D2413F4C50049A1A2 /* ImpresaJwplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* ImpresaJwplayer.m */; };
-		F4FF95D7245B92E800C19C63 /*  ImpresaJwplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /*  ImpresaJwplayer.swift */; };
-
+		DDF07B5D269F29BF00AEFC34 /* JwPlayerViewControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF07B5C269F29BF00AEFC34 /* JwPlayerViewControls.swift */; };
+		DDF07B5F269F29E700AEFC34 /* ImpresaJwplayerViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF07B5E269F29E700AEFC34 /* ImpresaJwplayerViewBase.swift */; };
+		F4FF95D7245B92E800C19C63 /* ImpresaJwplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* ImpresaJwplayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,11 +26,11 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libImpresaJwplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libImpresaJwplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
-
 		B3E7B5891CC2AC0600A0062D /* ImpresaJwplayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImpresaJwplayer.m; sourceTree = "<group>"; };
+		DDF07B5C269F29BF00AEFC34 /* JwPlayerViewControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JwPlayerViewControls.swift; sourceTree = "<group>"; };
+		DDF07B5E269F29E700AEFC34 /* ImpresaJwplayerViewBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresaJwplayerViewBase.swift; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* ImpresaJwplayer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImpresaJwplayer-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* ImpresaJwplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresaJwplayer.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +55,21 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-
+				DDF07B5E269F29E700AEFC34 /* ImpresaJwplayerViewBase.swift */,
+				DDF07B5B269F29A100AEFC34 /* JwPlayerViewControls */,
 				F4FF95D6245B92E800C19C63 /* ImpresaJwplayer.swift */,
 				B3E7B5891CC2AC0600A0062D /* ImpresaJwplayer.m */,
 				F4FF95D5245B92E700C19C63 /* ImpresaJwplayer-Bridging-Header.h */,
-
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		DDF07B5B269F29A100AEFC34 /* JwPlayerViewControls */ = {
+			isa = PBXGroup;
+			children = (
+				DDF07B5C269F29BF00AEFC34 /* JwPlayerViewControls.swift */,
+			);
+			path = JwPlayerViewControls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,10 +129,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
+				DDF07B5D269F29BF00AEFC34 /* JwPlayerViewControls.swift in Sources */,
 				F4FF95D7245B92E800C19C63 /* ImpresaJwplayer.swift in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* ImpresaJwplayer.m in Sources */,
-
+				DDF07B5F269F29E700AEFC34 /* ImpresaJwplayerViewBase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,11 +244,9 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ImpresaJwplayer;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "ImpresaJwplayer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Debug;
 		};
@@ -259,10 +263,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ImpresaJwplayer;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "ImpresaJwplayer-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Release;
 		};

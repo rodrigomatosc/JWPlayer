@@ -6,7 +6,13 @@ import ImpresaJwplayerViewManager from 'react-native-impresa-jwplayer';
 export default function App() {
   return (
     <View style={styles.container}>
-      <ImpresaJwplayerViewManager color="#32a852" style={styles.box} />
+      <ImpresaJwplayerViewManager
+        color="#2f2f2"
+        style={styles.box}
+        file={
+          'https://videos.impresa.pt/sicnot/2021-07-14/747de110-c364-44a7-8e1a-8d754e2d78b4_th-joc3a3o-paulo-gomes/playlist.m3u8'
+        }
+      />
     </View>
   );
 }
@@ -14,12 +20,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   box: {
-    width: 60,
-    height: 60,
+    width: '100%',
+    aspectRatio: 16 / 9,
     marginVertical: 20,
   },
 });
