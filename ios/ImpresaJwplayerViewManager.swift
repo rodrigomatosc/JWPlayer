@@ -9,6 +9,6 @@ class ImpresaJwplayerViewManager: RCTViewManager {
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         let frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
-        return JwPlayerViewControls(frame: frame)
+        return ImpresaJwplayerViewBase(frame: frame)
     }
 }

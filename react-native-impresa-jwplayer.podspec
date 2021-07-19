@@ -14,7 +14,11 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://impresa.pt.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm,swift}"
-
+  
   s.dependency "React-Core"
   s.dependency "JWPlayer-SDK"
+  
+  s.resource = ['ios/*.js', "ios/**/*.xib"]
+  s.resource_bundles = { 'ImpresaJwplayer_bundle' => ['ios/*.ttf', 'ios/*.storyboard','ios/*.xcassets'] }
+  
 end
