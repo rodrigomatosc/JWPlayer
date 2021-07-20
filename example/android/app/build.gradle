@@ -178,10 +178,21 @@ android {
     }
 }
 
+ext.JWPlayerVersion = '3.19.4'
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    implementation "com.longtailvideo.jwplayer:jwplayer-core:$JWPlayerVersion"
+    implementation "com.longtailvideo.jwplayer:jwplayer-common:$JWPlayerVersion"
+    implementation "com.longtailvideo.jwplayer:jwplayer-chromecast:$JWPlayerVersion"
+  // Only required if using IMA features
+  implementation "com.longtailvideo.jwplayer:jwplayer-ima:$JWPlayerVersion"
+
+  // Only required if using FreeWheel
+  implementation "com.longtailvideo.jwplayer:jwplayer-freewheel:$JWPlayerVersion"
 
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"

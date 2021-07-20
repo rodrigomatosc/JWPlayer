@@ -1,15 +1,15 @@
 import React, { createRef, useImperativeHandle } from 'react';
 import {
-  findNodeHandle,
+  // findNodeHandle,
   requireNativeComponent,
-  UIManager,
+  // UIManager,
   ViewStyle,
 } from 'react-native';
 
 type ImpresaJwplayerProps = {
-  color: string;
-  file: string;
-  style: ViewStyle;
+  color?: string;
+  file?: string;
+  style?: ViewStyle;
   imageFile?: string;
   volume?: number;
   autostart?: boolean;
@@ -22,6 +22,7 @@ type ImpresaJwplayerProps = {
   onPlay?: Function;
   onPause?: Function;
   ref?: any;
+  playlistItem: object;
 };
 
 export const ImpresaJwplayerComponent =
