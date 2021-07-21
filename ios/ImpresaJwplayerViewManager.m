@@ -24,10 +24,7 @@ RCT_EXPORT_VIEW_PROPERTY(onPause, RCTBubblingEventBlock)
 
 // methods properties
 RCT_EXTERN_METHOD(play:(nonnull NSNumber *)node)
-
-RCT_EXTERN_METHOD(pause)
-
-RCT_EXTERN_METHOD(fullscreen)
-RCT_EXTERN_METHOD(exitFullscreen)
+RCT_EXTERN_METHOD(toggleFullScreen:(nonnull NSNumber *)node)
+RCT_EXTERN_METHOD(pause:(nonnull NSNumber *)node)
 
 @end

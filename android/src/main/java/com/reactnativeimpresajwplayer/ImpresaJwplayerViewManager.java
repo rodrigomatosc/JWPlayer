@@ -1,10 +1,13 @@
 package com.reactnativeimpresajwplayer;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -13,8 +16,12 @@ import com.longtailvideo.jwplayer.JWPlayerView;
 
 import java.util.Map;
 
+
 public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplayerView> {
     public static final String REACT_CLASS = "ImpresaJwplayerView";
+    public static final int COMMAND_PLAY = 1;
+    public static final int COMMAND_PAUSE = 2;
+  public static final int COMMAND_TOGGLE_FULL_SCREEN = 3;
 
     @Override
     @NonNull
@@ -83,4 +90,54 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
       .build();
   }
 
+  @Nullable
+  @Override
+  public Map<String, Integer> getCommandsMap() {
+    Log.d("React"," View manager getCommandsMap:");
+    return MapBuilder.of(
+      "play",
+      COMMAND_PLAY,
+      "pause",
+      COMMAND_PAUSE,
+      "toggleFullScreen",
+      COMMAND_TOGGLE_FULL_SCREEN);
+  }
+
+  @Override
+  public void receiveCommand(@NonNull ImpresaJwplayerView root, int commandId, @Nullable ReadableArray args) {
+    super.receiveCommand(root, commandId, args);
+    switch (commandId) {
+      case COMMAND_PAUSE:
+        Log.d("Rodrigo"," View manager getCommandsMap:PAUSE");
+        pause(root);
+        break;
+      case COMMAND_PLAY:
+        Log.d("Rodrigo"," View manager getCommandsMap:PLAY");
+        play(root);
+        break;
+      case COMMAND_TOGGLE_FULL_SCREEN:
+        Log.d("Rodrigo"," View manager getCommandsMap:FULL");
+        toggleFullScreen(root);
+        break;
+      default:
+    }
+  }
+
+  public void play(ImpresaJwplayerView root) {
+    if(root != null){
+        root.getmPlayerView().play();
+    }
+  }
+
+  public void pause(ImpresaJwplayerView root) {
+    if(root != null){
+      root.getmPlayerView().pause();
+    }
+  }
+
+  public void toggleFullScreen(ImpresaJwplayerView root) {
+    if(root != null){
+      root.getmPlayerView().setFullscreen(!root.getmPlayerView().getFullscreen(), true);
+    }
+  }
 }

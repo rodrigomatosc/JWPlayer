@@ -1,8 +1,8 @@
-import React, { createRef, useImperativeHandle } from 'react';
+import React, { createRef, useEffect, useImperativeHandle } from 'react';
 import {
-  // findNodeHandle,
+  findNodeHandle,
   requireNativeComponent,
-  // UIManager,
+  UIManager,
   ViewStyle,
 } from 'react-native';
 
@@ -22,33 +22,50 @@ type ImpresaJwplayerProps = {
   onPlay?: Function;
   onPause?: Function;
   ref?: any;
-  playlistItem: object;
+  playlistItem?: object;
 };
 
+const JWPLAYER_TAG = 'ImpresaJwplayerView';
 export const ImpresaJwplayerComponent =
-  requireNativeComponent<ImpresaJwplayerProps>('ImpresaJwplayerView');
+  requireNativeComponent<ImpresaJwplayerProps>(JWPLAYER_TAG);
 
 const ImpresaJwplayerViewManager: React.FC<ImpresaJwplayerProps> =
   React.forwardRef((props, ref) => {
-    const testRef = createRef();
+    const uiComponentRef = createRef();
+    const nativeCommands =
+      UIManager.getViewManagerConfig(JWPLAYER_TAG).Commands;
 
     useImperativeHandle(ref, () => ({
       play: () => {
-        // const nativeCommands = UIManager.getViewManagerConfig(
-        //   'ImpresaJwplayerView'
-        // ).Commands;
         /* @ts-ignore */
-        // const playerNodeHandle = findNodeHandle(testRef.current);
-        // console.log(playerNodeHandle);
-        // UIManager.dispatchViewManagerCommand(
-        //   playerNodeHandle,
-        //   nativeCommands.play,
-        //   []
-        // );
+        const playerNodeHandle = findNodeHandle(uiComponentRef.current);
+        UIManager.dispatchViewManagerCommand(
+          playerNodeHandle,
+          nativeCommands.play,
+          []
+        );
+      },
+      pause: () => {
+        /* @ts-ignore */
+        const playerNodeHandle = findNodeHandle(uiComponentRef.current);
+        UIManager.dispatchViewManagerCommand(
+          playerNodeHandle,
+          nativeCommands.pause,
+          []
+        );
+      },
+      toggleFullScreen: () => {
+        /* @ts-ignore */
+        const playerNodeHandle = findNodeHandle(uiComponentRef.current);
+        UIManager.dispatchViewManagerCommand(
+          playerNodeHandle,
+          nativeCommands.toggleFullScreen,
+          []
+        );
       },
     }));
 
-    return <ImpresaJwplayerComponent ref={testRef} {...props} />;
+    return <ImpresaJwplayerComponent ref={uiComponentRef} {...props} />;
   });
 
 export default ImpresaJwplayerViewManager;

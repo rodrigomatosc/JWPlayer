@@ -104,6 +104,10 @@ public class ImpresaJwplayerView extends FrameLayout implements
     return autostart;
   }
 
+  public JWPlayerView getmPlayerView() {
+    return mPlayerView;
+  }
+
   public void setAutostart(Boolean autostart) {
     this.autostart = autostart;
     mPlayerView.getConfig().setAutostart(autostart);

@@ -6,8 +6,15 @@ import ImpresaJwplayerViewManager from 'react-native-impresa-jwplayer';
 export default function App() {
   const jwRef = React.useRef();
   React.useEffect(() => {
-    /* @ts-ignore */
-    // jwRef.current?.play();
+    setTimeout(() => {
+      jwRef.current?.play();
+    }, 3000);
+    setTimeout(() => {
+      jwRef.current?.pause();
+    }, 6000);
+    setTimeout(() => {
+      jwRef.current?.toggleFullScreen();
+    }, 8000);
   }, []);
 
   return (
@@ -20,7 +27,7 @@ export default function App() {
           'https://videos.impresa.pt/sicnot/2021-07-14/747de110-c364-44a7-8e1a-8d754e2d78b4_th-joc3a3o-paulo-gomes/playlist.m3u8'
         }
         imageFile={'http://d3el35u4qe4frz.cloudfront.net/bkaovAYt-480.jpg'}
-        autostart={true}
+        autostart={false}
         // volume={0}
         onFullScreen={() => {
           Alert.alert('Teve fullscreen', 'fullscreen');

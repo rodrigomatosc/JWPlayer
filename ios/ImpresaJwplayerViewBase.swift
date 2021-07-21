@@ -14,7 +14,7 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
     @objc var onFullScreenExit: RCTBubblingEventBlock?
     @objc var onPlay: RCTBubblingEventBlock?
     @objc var onPause: RCTBubblingEventBlock?
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -78,13 +78,13 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
             config.autostart = autostart
         }
     }
-
+    
     @objc var repeatVideo: Bool = false {
         didSet {
-             config.repeat = repeatVideo
+            config.repeat = repeatVideo
         }
     }
-
+    
     @objc var controls: Bool = true {
         didSet {
             config.controls = controls
@@ -97,7 +97,7 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
             self.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 100)
         }
     }
-
+    
     @objc var widthVideo: Double = 300 {
         didSet {
             config.size.width = CGFloat(widthVideo)
@@ -132,10 +132,17 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
             self.onPause!(event)
         }
     }
-        
-    @objc public func play(_ node:NSNumber){
-        player?.play()
+    
+    public func toggleFullScreen(){
+       self.player?.fullscreen = !(self.player?.fullscreen ?? false)
     }
     
+    public func play(){
+        self.player?.play()
+    }
+    
+    public func pause(){
+        self.player?.pause()
+    }
 }
 
