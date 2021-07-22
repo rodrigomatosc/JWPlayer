@@ -7,12 +7,15 @@ export default function App() {
   const jwRef = React.useRef();
   React.useEffect(() => {
     setTimeout(() => {
+      /* @ts-ignore */
       jwRef.current?.play();
     }, 3000);
     setTimeout(() => {
+      /* @ts-ignore */
       jwRef.current?.pause();
     }, 6000);
     setTimeout(() => {
+      /* @ts-ignore */
       jwRef.current?.toggleFullScreen();
     }, 8000);
   }, []);

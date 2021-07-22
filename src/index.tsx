@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useImperativeHandle } from 'react';
+import React, { createRef, useImperativeHandle } from 'react';
 import {
   findNodeHandle,
   requireNativeComponent,
