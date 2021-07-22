@@ -1,0 +1,34 @@
+image: $CI_REGISTRY/devops/custom-docker-images:node
+
+stages:
+  - build-master
+  - release
+
+build-master:
+  stage: build-master
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR
+    expire_in: 1 week
+  script:
+    - echo building...
+  except:
+    refs:
+      - tags
+  only:
+    refs:
+      - master
+
+release:
+  stage: release
+  script:
+    - git checkout master
+    - git config user.email "jcoimbra@impresa.pt"
+    - git config user.name "jcoimbra"
+    - yarn version --patch --no-commit-hooks
+    - npm publish --verbose
+    - git push --follow-tags https://$CI_REGISTRY_USER:$GITLAB_TOKEN@git.impresa.pt/$CI_PROJECT_PATH.git
+  when: manual
+  only:
+    refs:
+      - master

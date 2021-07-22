@@ -44,7 +44,7 @@
   },
   "homepage": "https://impresa.pt#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://repo.impresa.pt/nexus/repository/Impresa-npm-mobile-apps/"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
