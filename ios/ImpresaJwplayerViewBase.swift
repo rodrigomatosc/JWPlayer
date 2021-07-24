@@ -18,8 +18,14 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         createConfig()
+        enableBackgroundAudio()
     }
     
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        self.player?.stop()
+    }
+  
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -34,7 +40,7 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
     }
         
     func createConfig(){
-        config.stretching = JWStretching.exactFit
+        config.stretching = JWStretching.uniform
         config.displayTitle = true
         config.size = CGSize(width: self.bounds.width, height: self.bounds.height);
     }
@@ -68,10 +74,33 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
         }
     }
     
+    func setupADSchedule(schedules:Array<Dictionary<String, String>>){
+        var ads = Array<JWAdBreak>()
+        for schedule in schedules {
+            let adBreak = JWAdBreak(tag:schedule["tag"] ?? "", offset: schedule["offset"] ?? "")
+            ads.append(adBreak)
+        }
+        
+        // Create the AdConfig
+        let adConfig = JWAdConfig()
+        adConfig.client = .vast
+        adConfig.schedule = ads
+        
+        // Initialize the JWConfig and create the JWPlayerController
+        config.advertising = adConfig
+    }
+    
     // external params
     
-    @objc var color: String = "" {
+    @objc var adSchedule: Array = Array<Dictionary<String, String>>() {
         didSet {
+            setupADSchedule(schedules: adSchedule)
+        }
+    }
+    
+    @objc var mediaId: String = "" {
+        didSet {
+            config.mediaId = mediaId
         }
     }
     

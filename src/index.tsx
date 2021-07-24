@@ -21,6 +21,8 @@ type ImpresaJwplayerProps = {
   onPause?: Function;
   ref?: any;
   playlistItem?: object;
+  adSchedule?: Array<{ tag: String; offset: string }>;
+  mediaId?: string;
 };
 
 const JWPLAYER_TAG = 'ImpresaJwplayerView';
