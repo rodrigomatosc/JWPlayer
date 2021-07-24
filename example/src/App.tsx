@@ -6,18 +6,18 @@ import ImpresaJwplayerViewManager from 'react-native-impresa-jwplayer';
 export default function App() {
   const jwRef = React.useRef();
   React.useEffect(() => {
-    setTimeout(() => {
-      /* @ts-ignore */
-      jwRef.current?.play();
-    }, 3000);
-    setTimeout(() => {
-      /* @ts-ignore */
-      jwRef.current?.pause();
-    }, 6000);
-    setTimeout(() => {
-      /* @ts-ignore */
-      jwRef.current?.toggleFullScreen();
-    }, 8000);
+    // setTimeout(() => {
+    //   /* @ts-ignore */
+    //   jwRef.current?.play();
+    // }, 3000);
+    // setTimeout(() => {
+    //   /* @ts-ignore */
+    //   jwRef.current?.pause();
+    // }, 6000);
+    // setTimeout(() => {
+    //   /* @ts-ignore */
+    //   jwRef.current?.toggleFullScreen();
+    // }, 8000);
   }, []);
 
   return (
@@ -32,18 +32,18 @@ export default function App() {
         imageFile={'http://d3el35u4qe4frz.cloudfront.net/bkaovAYt-480.jpg'}
         autostart={false}
         // volume={0}
-        onFullScreen={() => {
-          Alert.alert('Teve fullscreen', 'fullscreen');
-        }}
-        onFullScreenExit={() => {
-          Alert.alert('exit fullscreen', 'fullscreen');
-        }}
-        onPlay={() => {
-          Alert.alert('onPlay', 'play');
-        }}
-        onPause={() => {
-          Alert.alert('Pause', 'pause');
-        }}
+        // onFullScreen={() => {
+        //   Alert.alert('Teve fullscreen', 'fullscreen');
+        // }}
+        // onFullScreenExit={() => {
+        //   Alert.alert('exit fullscreen', 'fullscreen');
+        // }}
+        // onPlay={() => {
+        //   Alert.alert('onPlay', 'play');
+        // }}
+        // onPause={() => {
+        //   Alert.alert('Pause', 'pause');
+        // }}
       />
     </View>
   );
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
   },
   box: {
     width: '100%',
-    height: 280,
+    aspectRatio: 16 / 9,
+
     marginVertical: 20,
   },
 });

@@ -15,8 +15,6 @@ type ImpresaJwplayerProps = {
   autostart?: boolean;
   repeatVideo?: boolean;
   controls?: boolean;
-  heightVideo?: number;
-  widthVideo?: number;
   onFullScreen?: Function;
   onFullScreenExit?: Function;
   onPlay?: Function;

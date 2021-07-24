@@ -13,8 +13,6 @@ RCT_EXPORT_VIEW_PROPERTY(volume, double)
 RCT_EXPORT_VIEW_PROPERTY(autostart, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(repeatVideo, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(controls, BOOL)
-RCT_EXPORT_VIEW_PROPERTY(heightVideo, double)
-RCT_EXPORT_VIEW_PROPERTY(widthVideo, double)
 
 // events properties
 RCT_EXPORT_VIEW_PROPERTY(onFullScreen, RCTBubblingEventBlock)

@@ -17,22 +17,26 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        createConfig()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView() {
-        config = createConfig()
-        config.size = CGSize(width: self.bounds.width, height: self.bounds.width - 124);
+    override func reactSetFrame(_ frame: CGRect) {
+        let height = frame.size.height
+        let width = frame.size.width
+        config.size = CGSize(width: width, height: height);
+
         createPlayer(config: config)
+        super.reactSetFrame(frame)
     }
-    
-    func createConfig() -> JWConfig {
-        let config = JWConfig()
-        return config
+        
+    func createConfig(){
+        config.stretching = JWStretching.exactFit
+        config.displayTitle = true
+        config.size = CGSize(width: self.bounds.width, height: self.bounds.height);
     }
     
     func createPlayer(config : JWConfig) {
@@ -45,6 +49,22 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
             viewPlayer = playerView
             self.addSubview(playerView)
             self.bringSubviewToFront(playerView)
+        }
+    }
+    
+    func enableBackgroundAudio() -> Void {
+        let audioSession = AVAudioSession.sharedInstance()
+        try? audioSession.setCategory(.playback)
+        do {
+            try audioSession.setCategory(.playback)
+        } catch {
+            print("failure")
+        }
+        try? audioSession.setActive(true)
+        do {
+            try audioSession.setActive(true)
+        } catch {
+            print("failure")
         }
     }
     
@@ -90,21 +110,7 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
             config.controls = controls
         }
     }
-    
-    @objc var heightVideo: Double = 300 {
-        didSet {
-            NSLog("Veio aqui \(CGFloat(heightVideo))/")
-            self.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 100)
-        }
-    }
-    
-    @objc var widthVideo: Double = 300 {
-        didSet {
-            config.size.width = CGFloat(widthVideo)
-        }
-    }
-    
-    
+
     func onFullscreen(_ event: JWEvent & JWFullscreenEvent) {
         if event.fullscreen {
             if self.onFullScreen != nil{
