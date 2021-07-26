@@ -3,12 +3,4 @@
   package="com.reactnativeimpresajwplayer">
 
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-  <application>
-    <!--TODO Set your license key-->
-    <meta-data
-      android:name="JW_LICENSE_KEY"
-      android:value="vruEVPR8CLdvrqMOjBHcyKud1Z0jUAaz/0LQQKm6VBPE5ulk" />
-  </application>
-
 </manifest>

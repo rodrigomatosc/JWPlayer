@@ -2,6 +2,7 @@ package com.reactnativeimpresajwplayer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.ActionBar;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
@@ -22,7 +25,16 @@ import com.longtailvideo.jwplayer.events.FullscreenEvent;
 import com.longtailvideo.jwplayer.events.PauseEvent;
 import com.longtailvideo.jwplayer.events.PlayEvent;
 import com.longtailvideo.jwplayer.events.listeners.VideoPlayerEvents;
+import com.longtailvideo.jwplayer.media.ads.AdBreak;
+import com.longtailvideo.jwplayer.media.ads.AdSource;
+import com.longtailvideo.jwplayer.media.ads.Advertising;
 import com.longtailvideo.jwplayer.media.playlists.PlaylistItem;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import static com.longtailvideo.jwplayer.configuration.PlayerConfig.STRETCHING_EXACT_FIT;
 
 public class ImpresaJwplayerView extends FrameLayout implements
   VideoPlayerEvents.OnFullscreenListener,
@@ -36,11 +48,13 @@ public class ImpresaJwplayerView extends FrameLayout implements
   private String desc = "";
   private String mediaId = "";
   private Double volume = 100D;
-  private Boolean autostart = true;
+  private Boolean autostart = false;
+  private ReadableArray adSchedule = null;
 
   private ReactContext reactContext;
   private JWPlayerView mPlayerView;
   private PlaylistItem newPlayListItem;
+  private PlayerConfig config;
 
   public ImpresaJwplayerView(Context context) {
     super(context);
@@ -55,7 +69,11 @@ public class ImpresaJwplayerView extends FrameLayout implements
     this.addView(jwPlayerLayout);
 
     mPlayerView = findViewById(R.id.jwplayer);
-    mPlayerView.getConfig().setAutostart(autostart);
+    config = new PlayerConfig.Builder()
+      .autostart(autostart).stretching(STRETCHING_EXACT_FIT)
+      .build();
+
+    mPlayerView.setup(config);
 
     createListeners();
 
@@ -120,10 +138,27 @@ public class ImpresaJwplayerView extends FrameLayout implements
     return mPlayerView;
   }
 
-  public void setAutostart(Boolean autostart) {
-    this.autostart = autostart;
-    mPlayerView.getConfig().setAutostart(true);
+  public void setAdSchedule(ReadableArray adSchedule) {
+    this.adSchedule = adSchedule;
+    List<AdBreak> ads = new ArrayList<>();
+
+    for (int i = 0; i < adSchedule.size(); i++) {
+      ReadableMap adBreakProp = adSchedule.getMap(i);
+      String offset = adBreakProp.hasKey("offset") ? adBreakProp.getString("offset") : "pre";
+      if (adBreakProp.hasKey("tag")) {
+        AdBreak adBreak = new AdBreak(offset, AdSource.VAST, adBreakProp.getString("tag"));
+        ads.add(adBreak);
+      }
+    }
+
+    newPlayListItem.setAdSchedule(ads);
     mPlayerView.load(newPlayListItem);
+  }
+
+  public void setAutoStart(Boolean autostart) {
+    this.autostart = autostart;
+    config.setAutostart(autostart);
+    mPlayerView.setup(config);
   }
 
   public void setFile(String file) {
@@ -188,6 +223,7 @@ public class ImpresaJwplayerView extends FrameLayout implements
     } else {
       keyEvent = "onFullScreenExit";
     }
+
 
     WritableMap event = Arguments.createMap();
     ReactContext reactContext = (ReactContext)getContext();

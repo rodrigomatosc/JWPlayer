@@ -14,14 +14,15 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.longtailvideo.jwplayer.JWPlayerView;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 
 public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplayerView> {
     public static final String REACT_CLASS = "ImpresaJwplayerView";
-    public static final int COMMAND_PLAY = 1;
-    public static final int COMMAND_PAUSE = 2;
-    public static final int COMMAND_TOGGLE_FULL_SCREEN = 3;
+    public static final int COMMAND_PLAY = 1001;
+    public static final int COMMAND_PAUSE = 1002;
+    public static final int COMMAND_TOGGLE_FULL_SCREEN = 1003;
 
     @Override
     @NonNull
@@ -54,6 +55,13 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
       }
     }
 
+    @ReactProp(name = "adSchedule")
+    public void setAdSchedule(ImpresaJwplayerView view, ReadableArray prop) {
+      if(prop != null){
+        view.setAdSchedule(prop);
+      }
+    }
+
     @ReactProp(name = "volume")
     public void setVolume(ImpresaJwplayerView view, String prop) {
 
@@ -61,7 +69,7 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
 
     @ReactProp(name = "autostart")
     public void setAutoStart(ImpresaJwplayerView view, Boolean prop) {
-      view.setAutostart(prop);
+      view.setAutoStart(prop);
     }
 
   @Override
@@ -108,15 +116,15 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
     super.receiveCommand(root, commandId, args);
     switch (commandId) {
       case COMMAND_PAUSE:
-        Log.d("Rodrigo"," View manager getCommandsMap:PAUSE");
+        Log.d("jwplayer"," View manager getCommandsMap:PAUSE");
         pause(root);
         break;
       case COMMAND_PLAY:
-        Log.d("Rodrigo"," View manager getCommandsMap:PLAY");
+        Log.d("jwplayer"," View manager getCommandsMap:PLAY");
         play(root);
         break;
       case COMMAND_TOGGLE_FULL_SCREEN:
-        Log.d("Rodrigo"," View manager getCommandsMap:FULL");
+        Log.d("jwplayer"," View manager getCommandsMap:FULL");
         toggleFullScreen(root);
         break;
       default:
