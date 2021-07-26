@@ -21,7 +21,7 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
     public static final String REACT_CLASS = "ImpresaJwplayerView";
     public static final int COMMAND_PLAY = 1;
     public static final int COMMAND_PAUSE = 2;
-  public static final int COMMAND_TOGGLE_FULL_SCREEN = 3;
+    public static final int COMMAND_TOGGLE_FULL_SCREEN = 3;
 
     @Override
     @NonNull

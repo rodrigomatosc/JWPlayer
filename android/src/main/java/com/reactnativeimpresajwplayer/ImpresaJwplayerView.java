@@ -2,6 +2,7 @@ package com.reactnativeimpresajwplayer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -16,6 +17,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.longtailvideo.jwplayer.JWPlayerView;
+import com.longtailvideo.jwplayer.configuration.PlayerConfig;
 import com.longtailvideo.jwplayer.events.FullscreenEvent;
 import com.longtailvideo.jwplayer.events.PauseEvent;
 import com.longtailvideo.jwplayer.events.PlayEvent;
@@ -34,8 +36,6 @@ public class ImpresaJwplayerView extends FrameLayout implements
   private String desc = "";
   private String mediaId = "";
   private Double volume = 100D;
-  private String customStyle;
-  private String adVmap = "";
   private Boolean autostart = true;
 
   private ReactContext reactContext;
@@ -57,13 +57,25 @@ public class ImpresaJwplayerView extends FrameLayout implements
     mPlayerView = findViewById(R.id.jwplayer);
     mPlayerView.getConfig().setAutostart(autostart);
 
+    createListeners();
+
+    configurePlayList();
+  }
+
+  private void createListeners(){
     // Handle hiding/showing of ActionBar
     mPlayerView.addOnFullscreenListener(this);
     mPlayerView.addOnPlayListener(this);
     mPlayerView.addOnPauseListener(this);
-
-    configurePlayList();
   }
+
+  private void removeListners(){
+    // Handle hiding/showing of ActionBar
+    mPlayerView.removeOnFullscreenListener(this);
+    mPlayerView.removeOnPlayListener(this);
+    mPlayerView.removeOnPauseListener(this);
+  }
+
 
   private void configurePlayList(){
     newPlayListItem = new PlaylistItem.Builder().build();
@@ -110,7 +122,7 @@ public class ImpresaJwplayerView extends FrameLayout implements
 
   public void setAutostart(Boolean autostart) {
     this.autostart = autostart;
-    mPlayerView.getConfig().setAutostart(autostart);
+    mPlayerView.getConfig().setAutostart(true);
     mPlayerView.load(newPlayListItem);
   }
 
@@ -140,20 +152,22 @@ public class ImpresaJwplayerView extends FrameLayout implements
 
   public void setMediaId(String mediaId) {
     this.mediaId = mediaId;
-  }
-
-  public void setCustomStyle(String customStyle) {
-    this.customStyle = customStyle;
-  }
-
-  public void setAdVmap(String adVmap) {
-    this.adVmap = adVmap;
+    newPlayListItem.setMediaId(mediaId);
+    mPlayerView.load(newPlayListItem);
   }
 
   @Override
   public void requestLayout() {
     super.requestLayout();
     post(measureAndLayout);
+  }
+
+  @Override
+  protected void onDetachedFromWindow() {
+    super.onDetachedFromWindow();
+    mPlayerView.stop();
+    removeListners();
+    mPlayerView = null;
   }
 
   private final Runnable measureAndLayout = new Runnable() {
