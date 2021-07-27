@@ -3,6 +3,7 @@ package com.reactnativeimpresajwplayer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.media.AudioManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.longtailvideo.jwplayer.JWPlayerView;
 import com.longtailvideo.jwplayer.configuration.LogoConfig;
 import com.longtailvideo.jwplayer.configuration.PlayerConfig;
+import com.longtailvideo.jwplayer.events.DisplayClickEvent;
 import com.longtailvideo.jwplayer.events.FullscreenEvent;
 import com.longtailvideo.jwplayer.events.PauseEvent;
 import com.longtailvideo.jwplayer.events.PlayEvent;
@@ -44,7 +46,11 @@ import static com.longtailvideo.jwplayer.configuration.PlayerConfig.STRETCHING_E
 public class ImpresaJwplayerView extends FrameLayout implements
   VideoPlayerEvents.OnFullscreenListener,
   VideoPlayerEvents.OnPlayListener,
-  VideoPlayerEvents.OnPauseListener, LifecycleEventListener {
+  VideoPlayerEvents.OnPauseListener,
+  LifecycleEventListener,
+  VideoPlayerEvents.OnDisplayClickListener,
+  AudioManager.OnAudioFocusChangeListener
+{
 
   //Props
   private String file = "";
@@ -382,5 +388,17 @@ public class ImpresaJwplayerView extends FrameLayout implements
     mPlayerView.stop();
     removeListners();
     mPlayerView = null;
+  }
+
+  @Override
+  public void onDisplayClick(DisplayClickEvent displayClickEvent) {
+    Log.d("JwPlayer Impresa", "onDisplayClick");
+
+  }
+
+  @Override
+  public void onAudioFocusChange(int focusChange) {
+    Log.d("JwPlayer Impresa", "onAudioFocusChange");
+
   }
 }
