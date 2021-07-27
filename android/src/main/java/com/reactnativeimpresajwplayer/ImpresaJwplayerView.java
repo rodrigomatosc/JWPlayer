@@ -82,6 +82,10 @@ public class ImpresaJwplayerView extends FrameLayout implements
     createListeners();
     configurePlayList();
 
+    if(!autostart){
+      mPlayerView.stop();
+    }
+
     mPlayerView.setFullscreenHandler(new FullscreenHandler() {
       private ViewGroup mPlayerContainer;
       private ViewGroup mRootView;
@@ -144,7 +148,6 @@ public class ImpresaJwplayerView extends FrameLayout implements
         mPlayerView.initializeSurface();
 
         // As soon as the UI thread has finished processing the current message queue it
-        // should add the JWPlayerView back to the list item.
         mPlayerContainer.post(new Runnable() {
           @Override
           public void run() {
@@ -305,14 +308,6 @@ public class ImpresaJwplayerView extends FrameLayout implements
   public void requestLayout() {
     super.requestLayout();
     post(measureAndLayout);
-  }
-
-  @Override
-  protected void onDetachedFromWindow() {
-    super.onDetachedFromWindow();
-    mPlayerView.stop();
-    removeListners();
-    mPlayerView = null;
   }
 
   private final Runnable measureAndLayout = new Runnable() {
