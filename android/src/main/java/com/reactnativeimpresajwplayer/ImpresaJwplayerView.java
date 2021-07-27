@@ -58,6 +58,7 @@ public class ImpresaJwplayerView extends FrameLayout implements
 
   private ReactContext reactContext;
   private JWPlayerView mPlayerView;
+  private JWPlayerView mFullscreenPlayer;
   private PlaylistItem newPlayListItem;
   private PlayerConfig config;
 
@@ -156,6 +157,7 @@ public class ImpresaJwplayerView extends FrameLayout implements
               ViewGroup.LayoutParams.MATCH_PARENT
             ));
             mPlayerView.layout(mPlayerContainer.getLeft(), mPlayerContainer.getTop(), mPlayerContainer.getRight(), mPlayerContainer.getBottom());
+            mFullscreenPlayer = mPlayerView;
             mPlayerView.pause();
           }
         });
@@ -173,7 +175,9 @@ public class ImpresaJwplayerView extends FrameLayout implements
 
       @Override
       public void onDestroy() {
-
+        if (mFullscreenPlayer != null) {
+          onFullscreenExitRequested();
+        }
       }
 
       @Override
@@ -362,16 +366,17 @@ public class ImpresaJwplayerView extends FrameLayout implements
 
   @Override
   public void onHostResume() {
-
+    Log.d("Rodrigo", "resume");
   }
 
   @Override
   public void onHostPause() {
-
+    Log.d("Rodrigo", "pause");
   }
 
   @Override
   public void onHostDestroy() {
+    Log.d("Rodrigo", "destroy");
     mPlayerView.stop();
     removeListners();
     mPlayerView = null;
