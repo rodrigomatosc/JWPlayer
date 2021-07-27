@@ -80,6 +80,8 @@ public class ImpresaJwplayerView extends FrameLayout implements
       .build();
 
     mPlayerView.setup(config);
+    mPlayerView.setBackgroundAudio(false);
+
     createListeners();
     configurePlayList();
 
@@ -366,17 +368,17 @@ public class ImpresaJwplayerView extends FrameLayout implements
 
   @Override
   public void onHostResume() {
-    Log.d("Rodrigo", "resume");
+    Log.d("JwPlayer Impresa", "resume");
   }
 
   @Override
   public void onHostPause() {
-    Log.d("Rodrigo", "pause");
+    Log.d("JwPlayer Impresa", "pause");
   }
 
   @Override
   public void onHostDestroy() {
-    Log.d("Rodrigo", "destroy");
+    Log.d("JwPlayer Impresa", "destroy");
     mPlayerView.stop();
     removeListners();
     mPlayerView = null;
