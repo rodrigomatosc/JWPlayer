@@ -1,6 +1,6 @@
 {
   "name": "react-native-impresa-jwplayer",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "jwplayer lib",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
