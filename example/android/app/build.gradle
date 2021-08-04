@@ -178,31 +178,31 @@ android {
     }
 }
 
-ext.jwPlayerVersion = '4.0.0'
-ext.exoplayerVersion = '2.14.0'
+// ext.jwPlayerVersion = '4.0.0'
+// ext.exoplayerVersion = '2.14.0'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
-    // JWPlayer SDK --------------------
-    implementation "com.jwplayer:jwplayer-core:$jwPlayerVersion"
-    implementation "com.jwplayer:jwplayer-common:$jwPlayerVersion"
+  //   // JWPlayer SDK --------------------
+  //   implementation "com.jwplayer:jwplayer-core:$jwPlayerVersion"
+  //   implementation "com.jwplayer:jwplayer-common:$jwPlayerVersion"
 
-    // ExoPlayer dependencies
-    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayerVersion"
-    implementation "com.google.android.exoplayer:exoplayer-dash:$exoplayerVersion"
-    implementation "com.google.android.exoplayer:exoplayer-hls:$exoplayerVersion"
-    implementation "com.google.android.exoplayer:exoplayer-smoothstreaming:$exoplayerVersion"
-    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion"
+  //   // ExoPlayer dependencies
+  //   implementation "com.google.android.exoplayer:exoplayer-core:$exoplayerVersion"
+  //   implementation "com.google.android.exoplayer:exoplayer-dash:$exoplayerVersion"
+  //   implementation "com.google.android.exoplayer:exoplayer-hls:$exoplayerVersion"
+  //   implementation "com.google.android.exoplayer:exoplayer-smoothstreaming:$exoplayerVersion"
+  //   implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion"
 
-    // JW Player Native UI dependencies
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'com.android.volley:volley:1.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-  // --------------------
+  //   // JW Player Native UI dependencies
+  //   implementation 'com.squareup.picasso:picasso:2.71828'
+  //   implementation 'androidx.viewpager2:viewpager2:1.0.0'
+  //   implementation 'com.android.volley:volley:1.2.0'
+  //   implementation 'androidx.recyclerview:recyclerview:1.2.1'
+  // // -------------------
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
