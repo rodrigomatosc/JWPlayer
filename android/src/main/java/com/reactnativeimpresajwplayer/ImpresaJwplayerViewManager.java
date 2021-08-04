@@ -8,13 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.longtailvideo.jwplayer.JWPlayerView;
-
-import java.util.ArrayList;
+import com.jwplayer.pub.api.license.LicenseUtil;
 import java.util.Map;
 
 
@@ -23,8 +22,14 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
     public static final int COMMAND_PLAY = 1001;
     public static final int COMMAND_PAUSE = 1002;
     public static final int COMMAND_TOGGLE_FULL_SCREEN = 1003;
+    public static final int COMMAND_DESTROY = 1004;
 
-    @Override
+  @Override
+  public void setViewState(@NonNull ImpresaJwplayerView view, @Nullable ReadableMap accessibilityState) {
+    super.setViewState(view, accessibilityState);
+  }
+
+  @Override
     @NonNull
     public String getName() {
         return REACT_CLASS;
@@ -33,16 +38,34 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
     @Override
     @NonNull
     public ImpresaJwplayerView createViewInstance(ThemedReactContext reactContext) {
-      return new ImpresaJwplayerView(reactContext, reactContext.getCurrentActivity());
+      Log.d("Rodrigo", reactContext.getCurrentActivity().toString());
+      ImpresaJwplayerView impresaJwplayerView = new ImpresaJwplayerView(reactContext, reactContext.getCurrentActivity());
+      reactContext.addLifecycleEventListener(impresaJwplayerView);
+      return impresaJwplayerView;
     }
 
-    @ReactProp(name = "color")
-    public void setColor(View view, String color) {
-        view.setBackgroundColor(Color.parseColor(color));
+    @ReactProp(name = "licenseKey")
+    public void setLicenseKey(ImpresaJwplayerView view, String licenseKey) {
+      LicenseUtil.setLicenseKey(view.getContext(), licenseKey);
     }
 
-    @ReactProp(name = "file")
-    public void setFile(ImpresaJwplayerView view, String prop) {
+    @ReactProp(name = "title")
+    public void setTitle(ImpresaJwplayerView view, String title) {
+        view.setTitle(title);
+    }
+
+    @ReactProp(name = "description")
+    public void setDescription(ImpresaJwplayerView view, String description) {
+      view.setDesc(description);
+    }
+
+    @ReactProp(name = "mediaID")
+    public void setMediaId(ImpresaJwplayerView view, String mediaID) {
+      view.setMediaId(mediaID);
+    }
+
+     @ReactProp(name = "file")
+      public void setFile(ImpresaJwplayerView view, String prop) {
       if (view.getFile()!=prop) {
         view.setFile(prop);
       }
@@ -108,7 +131,9 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
       "pause",
       COMMAND_PAUSE,
       "toggleFullScreen",
-      COMMAND_TOGGLE_FULL_SCREEN);
+      COMMAND_TOGGLE_FULL_SCREEN,
+      "destroy",
+      COMMAND_DESTROY);
   }
 
   @Override
@@ -127,25 +152,35 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
         Log.d("jwplayer"," View manager getCommandsMap:FULL");
         toggleFullScreen(root);
         break;
+      case COMMAND_DESTROY:
+        Log.d("jwplayer"," View manager getCommandsMap:DESTROY");
+        destroy(root);
+        break;
       default:
     }
   }
 
   public void play(ImpresaJwplayerView root) {
     if(root != null){
-        root.getmPlayerView().play();
+        root.getPlayer().play();
     }
   }
 
   public void pause(ImpresaJwplayerView root) {
     if(root != null){
-      root.getmPlayerView().pause();
+      root.getPlayer().pause();
     }
   }
 
   public void toggleFullScreen(ImpresaJwplayerView root) {
     if(root != null){
-      root.getmPlayerView().setFullscreen(!root.getmPlayerView().getFullscreen(), true);
+      root.getPlayer().setFullscreen(!root.getPlayer().getFullscreen(), true);
+    }
+  }
+
+  public void destroy(ImpresaJwplayerView root) {
+    if(root != null){
+      root.destroyPlayer();
     }
   }
 }

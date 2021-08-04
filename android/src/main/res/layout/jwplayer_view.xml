@@ -6,7 +6,7 @@
   android:id="@+id/rootview"
   >
   >
-  <com.longtailvideo.jwplayer.JWPlayerView
+  <com.jwplayer.pub.view.JWPlayerView
     xmlns:jwp="http://schemas.android.com/apk/lib/com.longtailvideo.jwplayer"
     android:id="@+id/jwplayer"
     android:layout_width="match_parent"

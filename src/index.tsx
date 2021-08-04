@@ -1,4 +1,4 @@
-import React, { createRef, useImperativeHandle } from 'react';
+import React, { createRef, useEffect, useImperativeHandle } from 'react';
 import {
   findNodeHandle,
   requireNativeComponent,
@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 type ImpresaJwplayerProps = {
-  color?: string;
+  licenseKey?: string;
   file?: string;
   style?: ViewStyle;
   imageFile?: string;
@@ -23,6 +23,8 @@ type ImpresaJwplayerProps = {
   playlistItem?: object;
   adSchedule?: Array<{ tag: String; offset: string }>;
   mediaId?: string;
+  title?: string;
+  description?: string;
 };
 
 const JWPLAYER_TAG = 'ImpresaJwplayerView';
@@ -63,7 +65,26 @@ const ImpresaJwplayerViewManager: React.FC<ImpresaJwplayerProps> =
           []
         );
       },
+      destroy: () => {
+        destroyPlayer();
+      },
     }));
+
+    const destroyPlayer = () => {
+      /* @ts-ignore */
+      const playerNodeHandle = findNodeHandle(uiComponentRef.current);
+      UIManager.dispatchViewManagerCommand(
+        playerNodeHandle,
+        nativeCommands.destroy,
+        []
+      );
+    };
+
+    useEffect(() => {
+      return () => {
+        destroyPlayer();
+      };
+    }, []);
 
     return <ImpresaJwplayerComponent ref={uiComponentRef} {...props} />;
   });

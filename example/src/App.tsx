@@ -1,75 +1,69 @@
 import * as React from 'react';
+import 'react-native-gesture-handler';
+import JwPlayerView from './JwplayerView';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, View } from 'react-native';
 
-import { StyleSheet, View } from 'react-native';
-import ImpresaJwplayerViewManager from 'react-native-impresa-jwplayer';
-
-const TAG_ADS = 'https://playertest.longtailvideo.com/adtags/vmap2.xml';
-const MEDIA_ID = 'Ngu7QHmj';
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
-  const jwRef = React.useRef();
-  React.useEffect(() => {
-    // setTimeout(() => {
-    //   /* @ts-ignore */
-    //   jwRef.current?.play();
-    // }, 3000);
-    // setTimeout(() => {
-    //   /* @ts-ignore */
-    //   jwRef.current?.pause();
-    // }, 6000);
-    // setTimeout(() => {
-    //   /* @ts-ignore */
-    //   jwRef.current?.toggleFullScreen();
-    // }, 8000);
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <ImpresaJwplayerViewManager
-        ref={jwRef}
-        style={styles.box}
-        mediaId={MEDIA_ID}
-        file={
-          // 'https://videos.impresa.pt/sicnot/2021-07-14/747de110-c364-44a7-8e1a-8d754e2d78b4_th-joc3a3o-paulo-gomes/playlist.m3u8'
-          'https://live.impresa.pt/live/sic/sic.m3u8'
-        }
-        imageFile={'http://d3el35u4qe4frz.cloudfront.net/bkaovAYt-480.jpg'}
-        autostart={false}
-        adSchedule={[
-          { tag: TAG_ADS, offset: 'pre' },
-          { tag: TAG_ADS, offset: '5' },
-          { tag: TAG_ADS, offset: '10' },
-          { tag: TAG_ADS, offset: '15' },
-        ]}
-        // volume={0}
-        // onFullScreen={() => {
-        //   Alert.alert('Teve fullscreen', 'fullscreen');
-        // }}
-        // onFullScreenExit={() => {
-        //   Alert.alert('exit fullscreen', 'fullscreen');
-        // }}
-        // onPlay={() => {
-        //   Alert.alert('onPlay', 'play');
-        // }}
-        // onPause={() => {
-        //   Alert.alert('Pause', 'pause');
-        // }}
-      />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="First Tab" component={JwplayerViewStack} />
+        <Tab.Screen name="Secont Tab" component={JwPlayerView} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#2e2e2e',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  box: {
-    width: '100%',
-    aspectRatio: 16 / 9,
+const JwplayerViewStack: React.FC = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="First" component={JwplayerViewScreen} />
+      <Stack.Screen name="Second" component={JwPlayerView} />
+    </Stack.Navigator>
+  );
+};
 
-    marginVertical: 20,
-  },
-});
+interface JwplayerViewScreenProps {
+  navigation: object;
+}
+
+const JwplayerViewScreen: React.FC<JwplayerViewScreenProps> = ({
+  navigation,
+}) => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <JwPlayerView />
+      <TouchableOpacity
+        onPress={() => {
+          const pushAction = StackActions.push('Second');
+          /* @ts-ignore */
+          navigation.dispatch(pushAction);
+        }}
+        style={{
+          width: 200,
+          height: 50,
+          backgroundColor: '#2e2e2e',
+          marginVertical: 10,
+        }}
+      >
+        <Text
+          style={{
+            color: '#fff',
+            flex: 1,
+            textAlign: 'center',
+            textAlignVertical: 'center',
+          }}
+        >
+          go second
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
