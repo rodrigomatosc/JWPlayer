@@ -12,11 +12,16 @@ npm install react-native-impresa-jwplayer
 
 ##### iOS dependencies
 
+Version < 4.0.0
 Follow official instructions [iOS sdk installation](https://developer.jwplayer.com/jwplayer/docs/ios-getting-started) for installation via Cocoapods
+
+add pod 'React-Core', :path => '../node_modules/react-native/React', :modular_headers => true
 
 In your `info.plist` properties file, create a string entry named `JWPlayerKey`, and set its value to be your JW Player Beta license key. Make sure you enter this string exactly as you received it from JW Player, or as it appears in your JW Player Dashboard. The string is case-sensitive.
 
 ##### Android dependencies
+
+Version >= 4.0.0
 
 Follow official instructions [Android sdk installation](https://developer.jwplayer.com/jwplayer/docs/android-getting-started)
 
