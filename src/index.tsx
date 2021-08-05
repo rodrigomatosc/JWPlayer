@@ -24,7 +24,7 @@ type ImpresaJwplayerProps = {
   adSchedule?: Array<{ tag: String; offset: string }>;
   mediaId?: string;
   title?: string;
-  description?: string;
+  desc?: string;
 };
 
 const JWPLAYER_TAG = 'ImpresaJwplayerView';

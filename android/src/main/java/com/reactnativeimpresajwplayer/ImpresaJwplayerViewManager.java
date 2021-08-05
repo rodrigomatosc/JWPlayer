@@ -54,7 +54,7 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
         view.setTitle(title);
     }
 
-    @ReactProp(name = "description")
+    @ReactProp(name = "desc")
     public void setDescription(ImpresaJwplayerView view, String description) {
       view.setDesc(description);
     }

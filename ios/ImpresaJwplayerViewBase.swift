@@ -104,6 +104,24 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
         }
     }
     
+    @objc var desc: String = "" {
+        didSet {
+            config.desc = desc
+        }
+    }
+    
+    @objc var title: String = "" {
+        didSet {
+            config.title = title
+        }
+    }
+    
+    @objc var licenseKey: String = "" {
+        didSet {
+            
+        }
+    }
+    
     @objc var file: String = "" {
         didSet {
             config.file = file
@@ -177,6 +195,10 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
     }
     
     public func pause(){
+        self.player?.pause()
+    }
+    
+    public func destroy(){
         self.player?.pause()
     }
 }

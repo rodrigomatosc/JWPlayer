@@ -27,4 +27,8 @@ class ImpresaJwplayerViewManager: RCTViewManager {
     @objc public func pause(_ node:NSNumber){
         currentView?.pause()
     }
+    
+    @objc public func destroy(_ node:NSNumber){
+        currentView?.destroy()
+    }
 }

@@ -30,7 +30,7 @@ const JwPlayerView: React.FC = () => {
         style={styles.box}
         mediaId={MEDIA_ID}
         title={'JWPLAYER IMPRESA'}
-        description={
+        desc={
           'Vestibulum accumsan, arcu ut finibus posuere, leo lacus finibus neque, sed molestie metus justo eget augue'
         }
         file={
