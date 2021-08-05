@@ -24,10 +24,10 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
     public static final int COMMAND_TOGGLE_FULL_SCREEN = 1003;
     public static final int COMMAND_DESTROY = 1004;
 
-  @Override
-  public void setViewState(@NonNull ImpresaJwplayerView view, @Nullable ReadableMap accessibilityState) {
-    super.setViewState(view, accessibilityState);
-  }
+//  @Override
+//  public void setViewState(@NonNull ImpresaJwplayerView view, @Nullable ReadableMap accessibilityState) {
+//    super.setViewState(view, accessibilityState);
+//  }
 
   @Override
     @NonNull
