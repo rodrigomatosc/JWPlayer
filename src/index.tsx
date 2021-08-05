@@ -20,7 +20,6 @@ type ImpresaJwplayerProps = {
   onPlay?: Function;
   onPause?: Function;
   ref?: any;
-  playlistItem?: object;
   adSchedule?: Array<{ tag: String; offset: string }>;
   mediaId?: string;
   title?: string;

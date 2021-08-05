@@ -199,7 +199,9 @@ class ImpresaJwplayerViewBase : UIView, JWPlayerDelegate {
     }
     
     public func destroy(){
-        self.player?.pause()
+        self.player?.stop()
+        self.player = nil
+        self.viewPlayer = nil
     }
 }
 
