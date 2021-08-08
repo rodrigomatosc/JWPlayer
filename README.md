@@ -56,12 +56,12 @@ import ImpresaJwplayer from 'react-native-impresa-jwplayer';
 ## Available props
 
 | Prop              | Description                      | Type                                     |
-| ----------------- | -------------------------------- | ---------------------------------------- | --- |
+| ----------------- | -------------------------------- | ---------------------------------------- |
 | **`mediaId`**     | The JW media id.                 | `Int`                                    |
 | **`file`**        | The url of the file to play.     | `String`                                 |
 | **`title`**       | The title of the track.          | `String`                                 |
 | **`imageFile`**   | The url of the player thumbnail. | `String`                                 |
-| **`autostart`**   | Should the track auto start.     | `Boolean`                                |     |
+| **`autostart`**   | Should the track auto start.     | `Boolean`                                |
 | **`desc`**        | Description of the track.        | `String`                                 |
 | **`controls`**    | Should the control buttons show. | `Boolean`                                |
 | **`repeatVideo`** | Should the track repeat.         | `Boolean`                                |
@@ -79,9 +79,9 @@ import ImpresaJwplayer from 'react-native-impresa-jwplayer';
 ## Available callbacks
 
 | Func                   | Description                  | Argument |
-| ---------------------- | ---------------------------- | -------- | --- |
+| ---------------------- | ---------------------------- | -------- |
 | **`onPlay`**           | Player started playing.      | `none`   |
-| **`onPause`**          | Player paused playing.       | `none`   |     |
+| **`onPause`**          | Player paused playing.       | `none`   |
 | **`onFullScreen`**     | Player went into fullscreen. | `none`   |
 | **`onFullScreenExit`** | Player exited fullscreen.    | `none`   |
 
