@@ -39,7 +39,7 @@ const JwPlayerView: React.FC = () => {
         }
         imageFile={'http://d3el35u4qe4frz.cloudfront.net/bkaovAYt-480.jpg'}
         autostart={false}
-        adSchedule={[{ tag: TAG_ADS, offset: 'pre' }]}
+        adSchedule={[{ tag: TAG_ADS, offset: 'pre' }, { tag: TAG_ADS, offset: '10' }]}
         // volume={0}
         // onFullScreen={() => {
         //   Alert.alert('Teve fullscreen', 'fullscreen');

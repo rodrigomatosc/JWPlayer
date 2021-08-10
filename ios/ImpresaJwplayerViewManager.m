@@ -1,5 +1,5 @@
 #import "React/RCTViewManager.h"
-#import <JWPlayer_iOS_SDK/JWPlayerController.h>
+//#import <JWPlayer_iOS_SDK/JWPlayerController.h>
 
 
 @interface RCT_EXTERN_MODULE(ImpresaJwplayerViewManager, RCTViewManager)

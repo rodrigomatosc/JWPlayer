@@ -80,9 +80,16 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - JWPlayer-SDK (3.20.1)
+  - google-cast-sdk (4.6.1):
+    - google-cast-sdk/Core (= 4.6.1)
+    - Protobuf (~> 3.13)
+  - google-cast-sdk/Core (4.6.1):
+    - Protobuf (~> 3.13)
+  - GoogleAds-IMA-iOS-SDK (3.14.4)
+  - JWPlayerKit (4.0.0)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
+  - Protobuf (3.17.0)
   - RCTRequired (0.63.4)
   - RCTTypeSafety (0.63.4):
     - FBLazyVector (= 0.63.4)
@@ -249,8 +256,10 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
-  - react-native-impresa-jwplayer (0.1.20):
-    - JWPlayer-SDK
+  - react-native-impresa-jwplayer (0.1.21):
+    - google-cast-sdk
+    - GoogleAds-IMA-iOS-SDK (~> 3.14.3)
+    - JWPlayerKit (~> 4.0.0)
     - React-Core
   - react-native-safe-area-context (3.2.0):
     - React-Core
@@ -422,9 +431,12 @@ SPEC REPOS:
     - Flipper-PeerTalk
     - Flipper-RSocket
     - FlipperKit
-    - JWPlayer-SDK
+    - google-cast-sdk
+    - GoogleAds-IMA-iOS-SDK
+    - JWPlayerKit
     - libevent
     - OpenSSL-Universal
+    - Protobuf
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -510,9 +522,12 @@ SPEC CHECKSUMS:
   FlipperKit: e99c816ade3cae59050ef395cff8c54553959211
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  JWPlayer-SDK: b944b342ba3e046b753112bbc5b219cade315f80
+  google-cast-sdk: 9fc76175641bc24ef2515e0263344bd2c5c4e75c
+  GoogleAds-IMA-iOS-SDK: c190284044e9a28b3e7422ba9886db015c71a84f
+  JWPlayerKit: e484a07119faca8e5014c5c77275a226d7ba6d7f
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
+  Protobuf: 7327d4444215b5f18e560a97f879ff5503c4581c
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b
   React: b0a957a2c44da4113b0c4c9853d8387f8e64e615
@@ -523,7 +538,7 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-impresa-jwplayer: b0b8af0ff0c686760405b18cee6407aee86f379b
+  react-native-impresa-jwplayer: 7e836ca18d7d5c48e186bc173b8591afc1ac7b7d
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b

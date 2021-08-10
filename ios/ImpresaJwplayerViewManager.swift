@@ -1,3 +1,5 @@
+import JWPlayerKit
+
 @objc(ImpresaJwplayerViewManager)
 class ImpresaJwplayerViewManager: RCTViewManager {
     
@@ -17,18 +19,18 @@ class ImpresaJwplayerViewManager: RCTViewManager {
     }
     
     @objc public func toggleFullScreen(_ node:NSNumber){
-        currentView?.toggleFullScreen()
+//        currentView?.toggleFullScreen()
     }
     
     @objc public func play(_ node:NSNumber){
-        currentView?.play()
+//        currentView?.play()
     }
     
     @objc public func pause(_ node:NSNumber){
-        currentView?.pause()
+//        currentView?.pause()
     }
     
     @objc public func destroy(_ node:NSNumber){
-        currentView?.destroy()
+//        currentView?.destroy()
     }
 }

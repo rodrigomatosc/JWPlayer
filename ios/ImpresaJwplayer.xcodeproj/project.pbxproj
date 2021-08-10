@@ -29,6 +29,9 @@
 		B3E7B5891CC2AC0600A0062D /* ImpresaJwplayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImpresaJwplayer.m; sourceTree = "<group>"; };
 		DDBC069326A343E100779364 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDBC069426A3451300779364 /* ControlsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlsView.xib; sourceTree = "<group>"; };
+		DDBF075426C2A29800E3F176 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DDBF075526C2A29800E3F176 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DDBF075626C2E2AA00E3F176 /* ImpresaViewControllerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresaViewControllerBase.swift; sourceTree = "<group>"; };
 		DDF07B5C269F29BF00AEFC34 /* JwPlayerViewControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JwPlayerViewControls.swift; sourceTree = "<group>"; };
 		DDF07B5E269F29E700AEFC34 /* ImpresaJwplayerViewBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresaJwplayerViewBase.swift; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* ImpresaJwplayer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImpresaJwplayer-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -57,11 +60,14 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				DDBF075626C2E2AA00E3F176 /* ImpresaViewControllerBase.swift */,
 				DDBC069326A343E100779364 /* Assets.xcassets */,
 				DDF07B5E269F29E700AEFC34 /* ImpresaJwplayerViewBase.swift */,
 				DDF07B5B269F29A100AEFC34 /* JwPlayerViewControls */,
 				F4FF95D6245B92E800C19C63 /* ImpresaJwplayer.swift */,
 				B3E7B5891CC2AC0600A0062D /* ImpresaJwplayer.m */,
+				DDBF075426C2A29800E3F176 /* ViewController.h */,
+				DDBF075526C2A29800E3F176 /* ViewController.m */,
 				F4FF95D5245B92E700C19C63 /* ImpresaJwplayer-Bridging-Header.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
