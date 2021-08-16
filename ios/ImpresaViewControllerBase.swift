@@ -57,48 +57,5 @@ class VastViewController: JWPlayerViewController, JWDRMContentKeyDataSource {
             print("Error building configuration:", error.localizedDescription)
         }
     }
-    
-    // Build a JWAdvertisingConfig to setup the advertising for your media.
-    private func buildAdvertising() -> JWAdvertisingConfig? {
-        var adConfig : JWAdvertisingConfig? = nil
-        // Initialize the ad URL, in this case from a String
-        let adURL = URL(string: adUrlString)!
-
-        // Initialize the builder.
-        let adConfigBuilder = JWAdsAdvertisingConfigBuilder()
-            // Set the VAST tag for the builder to use.
-            // If tag AND schedule are set, this will throw an error.
-            // Only set one of these.
-            .tag(adURL)
-
-        do {
-            adConfig = try adConfigBuilder.build()
-        } catch {
-            print(error.localizedDescription)
-        }
-
-        return adConfig
-    }
-    
-    // As with the configuration for the player we need to create a JWPlayerItem, using our JWPlayerItemBuilder().
-    // This requires a file or sources.
-    // Since the build method can throw, you need to handle errors if any are thrown.
-    public func buildPlayerItem() -> JWPlayerItem? {
-        var item: JWPlayerItem? = nil
-        let videoUrl = URL(string:videoUrlString)!
-        let posterUrl = URL(string:posterUrlString)!
-
-        // To create a new JWPlayerItem, use the builder.
-        let builder =  JWPlayerItemBuilder() // Initialize the builder.
-            .file(videoUrl) // Set the file, which takes in a URL for the media.
-            .posterImage(posterUrl) // You can set a poster image for the media.
-        do {
-            item = try builder.build() // Build the item. This method can throw so be sure to handle the error.
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return item
-    }
 }
 
