@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import ImpresaJwplayerViewManager from 'react-native-impresa-jwplayer';
 
-const TAG_ADS = 'https://playertest.longtailvideo.com/adtags/vmap2.xml';
+// const TAG_ADS = 'https://playertest.longtailvideo.com/adtags/vmap2.xml';
 const MEDIA_ID = 'Ngu7QHmj';
+const isIOS = Platform.OS == 'ios';
+const keyAndroid = 'vruEVPR8CLdvrqMOjBHcyKud1Z0jUAaz/0LQQKm6VBPE5ulk';
+const keyIOS = 'S0rXXMtyuPqRWFL0tL+eYS+KzTazkNQJH5eed+1+gtxuHb2U';
 
 const JwPlayerView: React.FC = () => {
   const jwRef = React.useRef();
@@ -25,7 +28,7 @@ const JwPlayerView: React.FC = () => {
   return (
     <View style={styles.container}>
       <ImpresaJwplayerViewManager
-        licenseKey={'vruEVPR8CLdvrqMOjBHcyKud1Z0jUAaz/0LQQKm6VBPE5ulk'}
+        licenseKey={isIOS ? keyIOS : keyAndroid}
         ref={jwRef}
         style={styles.box}
         mediaId={MEDIA_ID}
@@ -34,15 +37,15 @@ const JwPlayerView: React.FC = () => {
           'Vestibulum accumsan, arcu ut finibus posuere, leo lacus finibus neque, sed molestie metus justo eget augue'
         }
         file={
-          'https://videos.impresa.pt/sicnot/2021-07-14/747de110-c364-44a7-8e1a-8d754e2d78b4_th-joc3a3o-paulo-gomes/playlist.m3u8'
-          // 'https://live.impresa.pt/live/sic/sic.m3u8'
+          // 'https://videos.impresa.pt/sicnot/2021-07-14/747de110-c364-44a7-8e1a-8d754e2d78b4_th-joc3a3o-paulo-gomes/playlist.m3u8'
+          'https://live.impresa.pt/live/sic/sic.m3u8'
         }
         imageFile={'http://d3el35u4qe4frz.cloudfront.net/bkaovAYt-480.jpg'}
         autostart={false}
-        adSchedule={[
-          { tag: TAG_ADS, offset: 'pre' },
-          { tag: TAG_ADS, offset: '10' },
-        ]}
+        // adSchedule={[
+        //   { tag: TAG_ADS, offset: 'pre' },
+        //   { tag: TAG_ADS, offset: '10' },
+        // ]}
         // volume={0}
         // onFullScreen={() => {
         //   Alert.alert('Teve fullscreen', 'fullscreen');
