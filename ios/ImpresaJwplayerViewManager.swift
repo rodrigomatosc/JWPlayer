@@ -1,3 +1,5 @@
+import JWPlayerKit
+
 @objc(ImpresaJwplayerViewManager)
 class ImpresaJwplayerViewManager: RCTViewManager {
     

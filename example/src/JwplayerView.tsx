@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import ImpresaJwplayerViewManager from 'react-native-impresa-jwplayer';
 
-const TAG_ADS = 'https://playertest.longtailvideo.com/adtags/vmap2.xml';
+// const TAG_ADS = 'https://playertest.longtailvideo.com/adtags/vmap2.xml';
 const MEDIA_ID = 'Ngu7QHmj';
+const isIOS = Platform.OS == 'ios';
+const keyAndroid = 'vruEVPR8CLdvrqMOjBHcyKud1Z0jUAaz/0LQQKm6VBPE5ulk';
+const keyIOS = 'S0rXXMtyuPqRWFL0tL+eYS+KzTazkNQJH5eed+1+gtxuHb2U';
 
 const JwPlayerView: React.FC = () => {
   const jwRef = React.useRef();
@@ -25,7 +28,7 @@ const JwPlayerView: React.FC = () => {
   return (
     <View style={styles.container}>
       <ImpresaJwplayerViewManager
-        licenseKey={'vruEVPR8CLdvrqMOjBHcyKud1Z0jUAaz/0LQQKm6VBPE5ulk'}
+        licenseKey={isIOS ? keyIOS : keyAndroid}
         ref={jwRef}
         style={styles.box}
         mediaId={MEDIA_ID}
@@ -39,7 +42,10 @@ const JwPlayerView: React.FC = () => {
         }
         imageFile={'http://d3el35u4qe4frz.cloudfront.net/bkaovAYt-480.jpg'}
         autostart={false}
-        // adSchedule={[{ tag: TAG_ADS, offset: 'pre' }]}
+        // adSchedule={[
+        //   { tag: TAG_ADS, offset: 'pre' },
+        //   { tag: TAG_ADS, offset: '10' },
+        // ]}
         // volume={0}
         // onFullScreen={() => {
         //   Alert.alert('Teve fullscreen', 'fullscreen');
