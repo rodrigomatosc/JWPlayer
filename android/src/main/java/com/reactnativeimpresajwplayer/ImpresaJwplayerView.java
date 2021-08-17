@@ -194,8 +194,15 @@ public class ImpresaJwplayerView extends FrameLayout implements
   }
 
   public void setImage(String image) {
-    config = new PlayerConfig.Builder(config)
+    playListItem = new PlaylistItem.Builder(playListItem)
       .image(image)
+      .build();
+
+    List<PlaylistItem> playlist = new ArrayList<>();
+    playlist.add(playListItem);
+
+    config = new PlayerConfig.Builder(config)
+      .playlist(playlist)
       .build();
     player.setup(config);
   }
