@@ -44,7 +44,7 @@ class ImpresaJwplayerViewBase : UIView {
         addSubview(vcImpresa.view)
         vcImpresa.view.frame = bounds
         vcImpresa.didMove(toParent: parentVC)
-        vcImpresa.forceLandscapeOnFullScreen = false
+        vcImpresa.forceLandscapeOnFullScreen = true
         vcImpresa.forceFullScreenOnLandscape = true
         
         
@@ -179,13 +179,17 @@ class ImpresaJwplayerViewBase : UIView {
     }
     
     public func localOnPause(){
-        let event = ["_pause": Bool()]
-        self.onPause!(event)
+       if self.onPause != nil{
+          let event = ["_pause": Bool()]
+          self.onPause!(event)
+       }
     }
     
     public func localOnPlay(){
+      if self.onPlay != nil{
         let event = ["_play": Bool()]
         self.onPlay!(event)
+      }
     }
     
     func onFullscreen() {
