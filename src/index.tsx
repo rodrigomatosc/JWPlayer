@@ -41,8 +41,6 @@ const ImpresaJwplayerViewManager: React.FC<ImpresaJwplayerProps> =
     const nativeCommands =
       UIManager.getViewManagerConfig(JWPLAYER_TAG).Commands;
 
-    const [file, setFile] = useState('');
-
     useImperativeHandle(ref, () => ({
       play: () => {
         /* @ts-ignore */
@@ -92,13 +90,7 @@ const ImpresaJwplayerViewManager: React.FC<ImpresaJwplayerProps> =
       };
     }, []);
 
-    useEffect(() => {
-      setFile(props.file);
-    }, [props.file]);
-
-    return (
-      <ImpresaJwplayerComponent ref={uiComponentRef} file={file} {...props} />
-    );
+    return <ImpresaJwplayerComponent ref={uiComponentRef} {...props} />;
   });
 
 export default React.memo(ImpresaJwplayerViewManager);
