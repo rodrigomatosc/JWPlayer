@@ -17,7 +17,7 @@ class ViewController: JWPlayerViewController {
 
         // Set up the player.
         setUpPlayer()
-        print("MyViewController loaded... Rodrigo")
+        print("MyViewController loaded...")
 
     }
 

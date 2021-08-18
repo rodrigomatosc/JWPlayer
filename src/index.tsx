@@ -1,4 +1,9 @@
-import React, { createRef, useEffect, useImperativeHandle } from 'react';
+import React, {
+  createRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import {
   findNodeHandle,
   requireNativeComponent,
@@ -36,6 +41,8 @@ const ImpresaJwplayerViewManager: React.FC<ImpresaJwplayerProps> =
     const nativeCommands =
       UIManager.getViewManagerConfig(JWPLAYER_TAG).Commands;
 
+    const [file, setFile] = useState('');
+
     useImperativeHandle(ref, () => ({
       play: () => {
         /* @ts-ignore */
@@ -47,7 +54,7 @@ const ImpresaJwplayerViewManager: React.FC<ImpresaJwplayerProps> =
         );
       },
       pause: () => {
-        /* @ts-ignore */
+        // /* @ts-ignore */
         const playerNodeHandle = findNodeHandle(uiComponentRef.current);
         UIManager.dispatchViewManagerCommand(
           playerNodeHandle,
@@ -85,7 +92,13 @@ const ImpresaJwplayerViewManager: React.FC<ImpresaJwplayerProps> =
       };
     }, []);
 
-    return <ImpresaJwplayerComponent ref={uiComponentRef} {...props} />;
+    useEffect(() => {
+      setFile(props.file);
+    }, [props.file]);
+
+    return (
+      <ImpresaJwplayerComponent ref={uiComponentRef} file={file} {...props} />
+    );
   });
 
-export default ImpresaJwplayerViewManager;
+export default React.memo(ImpresaJwplayerViewManager);

@@ -9,10 +9,9 @@ class VastViewController: JWPlayerViewController{
         super.viewDidLoad()
     }
 
-    func setup(configBuilder: JWPlayerConfigurationBuilder, item: JWPlayerItem, view: ImpresaJwplayerViewBase){
+    func setup(configBuilder: JWPlayerConfigurationBuilder, view: ImpresaJwplayerViewBase){
     
         self.viewBase = view;
-        let _ = configBuilder.playlist([item]).preload(.auto).repeatContent(false)
 
         do{
             let config = try configBuilder.build()

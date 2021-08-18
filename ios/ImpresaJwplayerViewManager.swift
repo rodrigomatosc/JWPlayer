@@ -2,9 +2,7 @@ import JWPlayerKit
 
 @objc(ImpresaJwplayerViewManager)
 class ImpresaJwplayerViewManager: RCTViewManager {
-    
-    var currentView: ImpresaJwplayerViewBase?
-    
+        
     override static func requiresMainQueueSetup() -> Bool {
         return true
     }
@@ -14,23 +12,42 @@ class ImpresaJwplayerViewManager: RCTViewManager {
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         let frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
-        currentView = ImpresaJwplayerViewBase(frame: frame)
-        return currentView
+        return ImpresaJwplayerViewBase(frame: frame)
+    }
+    
+    @objc func pause(_ node: NSNumber) -> Void {
+        DispatchQueue.main.async {
+            let component = self.bridge.uiManager.view(
+                forReactTag: node
+            ) as! ImpresaJwplayerViewBase
+            component.pause()
+        }
     }
     
     @objc public func toggleFullScreen(_ node:NSNumber){
-        currentView?.toggleFullScreen()
+        DispatchQueue.main.async {
+            let component = self.bridge.uiManager.view(
+                forReactTag: node
+            ) as! ImpresaJwplayerViewBase
+            component.toggleFullScreen()
+        }
     }
     
     @objc public func play(_ node:NSNumber){
-        currentView?.play()
-    }
-    
-    @objc public func pause(_ node:NSNumber){
-        currentView?.pause()
+        DispatchQueue.main.async {
+            let component = self.bridge.uiManager.view(
+                forReactTag: node
+            ) as! ImpresaJwplayerViewBase
+            component.play()
+        }
     }
     
     @objc public func destroy(_ node:NSNumber){
-        currentView?.destroy()
+        DispatchQueue.main.async {
+            let component = self.bridge.uiManager.view(
+                forReactTag: node
+            ) as! ImpresaJwplayerViewBase
+            component.destroy()
+        }
     }
 }

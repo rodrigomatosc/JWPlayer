@@ -277,7 +277,6 @@ public class ImpresaJwplayerView extends FrameLayout implements
       keyEvent = "onFullScreenExit";
     }
 
-
     WritableMap event = Arguments.createMap();
     ReactContext reactContext = (ReactContext)getContext();
     reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(

@@ -38,7 +38,17 @@ class ImpresaJwplayerViewBase : UIView {
             else {
             return
         }
-            
+        
+        var item: JWPlayerItem? = nil
+        do {
+            item = try itemBuilder.build()
+           
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        configBuilder.playlist([item!]).repeatContent(false)
+        
         let vcImpresa = VastViewController()
         parentVC.addChild(vcImpresa)
         addSubview(vcImpresa.view)
@@ -46,17 +56,12 @@ class ImpresaJwplayerViewBase : UIView {
         vcImpresa.didMove(toParent: parentVC)
         vcImpresa.forceLandscapeOnFullScreen = true
         vcImpresa.forceFullScreenOnLandscape = true
-        
-        
-        var item: JWPlayerItem? = nil
-        do {
-            item = try itemBuilder.build()
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        vcImpresa.setup(configBuilder: configBuilder, item: item!, view: self)
+        vcImpresa.setup(configBuilder: configBuilder, view: self)
         self.viewController = vcImpresa
+    }
+    
+    func setPlaylist(itemBuilder: JWPlayerItemBuilder){
+       
     }
     
     override func reactSetFrame(_ frame: CGRect) {
