@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  YellowBox,
 } from 'react-native';
 import ImpresaJwplayerViewManager from 'react-native-impresa-jwplayer';
 
@@ -28,6 +27,7 @@ const JwPlayerView: React.FC = () => {
   useFocusEffect(
     React.useCallback(() => {
       return () => {
+        /* @ts-ignore */
         jwRef.current && jwRef.current.pause();
       };
     }, [jwRef])

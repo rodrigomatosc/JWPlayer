@@ -1,9 +1,4 @@
-import React, {
-  createRef,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from 'react';
+import React, { createRef, useEffect, useImperativeHandle } from 'react';
 import {
   findNodeHandle,
   requireNativeComponent,
@@ -52,7 +47,7 @@ const ImpresaJwplayerViewManager: React.FC<ImpresaJwplayerProps> =
         );
       },
       pause: () => {
-        // /* @ts-ignore */
+        /* @ts-ignore */
         const playerNodeHandle = findNodeHandle(uiComponentRef.current);
         UIManager.dispatchViewManagerCommand(
           playerNodeHandle,

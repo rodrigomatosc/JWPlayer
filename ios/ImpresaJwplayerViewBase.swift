@@ -5,7 +5,6 @@ class ImpresaJwplayerViewBase : UIView {
 
     weak var viewController: VastViewController?
     var configBuilder: JWPlayerConfigurationBuilder = JWPlayerConfigurationBuilder()
-    var itemBuilder: JWPlayerItemBuilder = JWPlayerItemBuilder()
     
     @objc var onFullScreen: RCTBubblingEventBlock?
     @objc var onFullScreenExit: RCTBubblingEventBlock?
@@ -15,7 +14,6 @@ class ImpresaJwplayerViewBase : UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configBuilder = JWPlayerConfigurationBuilder()
-        itemBuilder = JWPlayerItemBuilder()
         enableBackgroundAudio()
     }
     
@@ -33,11 +31,15 @@ class ImpresaJwplayerViewBase : UIView {
     }
     
     private func embed() {
+        destroy();
+        
         guard
             let parentVC = parentViewController
             else {
             return
         }
+        
+        let itemBuilder = instanceItemBuilder()
         
         var item: JWPlayerItem? = nil
         do {
@@ -47,7 +49,9 @@ class ImpresaJwplayerViewBase : UIView {
             print(error.localizedDescription)
         }
         
-        configBuilder.playlist([item!]).repeatContent(false)
+        configBuilder.playlist([item!]).repeatContent(true)
+        
+       
         
         let vcImpresa = VastViewController()
         parentVC.addChild(vcImpresa)
@@ -115,6 +119,16 @@ class ImpresaJwplayerViewBase : UIView {
         }
     }
     
+    func instanceItemBuilder() -> JWPlayerItemBuilder{
+        let itemBuilder = JWPlayerItemBuilder()
+        itemBuilder.file(URL(string:self.file)!)
+        itemBuilder.mediaId(self.mediaId)
+        itemBuilder.posterImage(URL(string:self.imageFile)!)
+        itemBuilder.description(self.desc)
+        itemBuilder.title(self.title)
+        return itemBuilder;
+    }
+    
     // external params
     
     @objc var adSchedule: Array = Array<Dictionary<String, String>>() {
@@ -125,19 +139,25 @@ class ImpresaJwplayerViewBase : UIView {
     
     @objc var mediaId: String = "" {
         didSet {
-            itemBuilder.mediaId(mediaId)
+            if( self.viewController != nil){
+                embed()
+            }
         }
     }
     
     @objc var desc: String = "" {
         didSet {
-            itemBuilder.description(desc)
+            if( self.viewController != nil){
+                embed()
+            }
         }
     }
     
     @objc var title: String = "" {
         didSet {
-            itemBuilder.title(title)
+            if( self.viewController != nil){
+                embed()
+            }
         }
     }
     
@@ -149,13 +169,17 @@ class ImpresaJwplayerViewBase : UIView {
     
     @objc var file: String = "" {
         didSet {
-            itemBuilder.file(URL(string:file)!)
+            if( self.viewController != nil){
+                embed()
+            }
         }
     }
     
     @objc var imageFile: String = "" {
         didSet {
-            itemBuilder.posterImage(URL(string:imageFile)!)
+            if( self.viewController != nil){
+                embed()
+            }
         }
     }
     
@@ -226,7 +250,7 @@ class ImpresaJwplayerViewBase : UIView {
     }
     
     public func destroy(){
-        self.viewController?.player.stop();
+        self.viewController?.removeFromParent()
         self.viewController = nil
     }
 }
