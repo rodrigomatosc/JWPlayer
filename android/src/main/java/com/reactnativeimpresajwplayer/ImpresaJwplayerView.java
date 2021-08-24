@@ -71,6 +71,9 @@ public class ImpresaJwplayerView extends FrameLayout implements
 
     player = mPlayerView.getPlayer();
 
+    // Keep the screen on during playback
+    new ImpresaKeepScreenOnHandler(player, activity.getWindow());
+
     config = new PlayerConfig.Builder()
       .stretching(PlayerConfig.STRETCHING_UNIFORM)
       .build();
