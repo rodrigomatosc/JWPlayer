@@ -39,7 +39,6 @@ public class ImpresaFullScreenHandler implements FullscreenHandler {
     // Enter landscape mode for fullscreen videos
     activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-
     // Remove the JWPlayerView from the list item.
     if (mPlayerContainer != null) {
       mPlayerContainer.removeView(jwPlayerView);
@@ -78,6 +77,7 @@ public class ImpresaFullScreenHandler implements FullscreenHandler {
           ViewGroup.LayoutParams.MATCH_PARENT
         ));
         jwPlayerView.layout(mPlayerContainer.getLeft(), mPlayerContainer.getTop(), mPlayerContainer.getRight(), mPlayerContainer.getBottom());
+
        // mFullscreenPlayer = jwPlayerView;
       }
     });

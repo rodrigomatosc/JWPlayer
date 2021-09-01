@@ -1,11 +1,19 @@
 package com.reactnativeimpresajwplayer;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
+import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactContext;
@@ -28,14 +36,13 @@ import com.jwplayer.pub.view.JWPlayerView;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class ImpresaJwplayerView extends FrameLayout implements
+public class ImpresaJwplayerView extends ConstraintLayout implements
   VideoPlayerEvents.OnFullscreenListener,
   VideoPlayerEvents.OnPlayListener,
   VideoPlayerEvents.OnPauseListener,
   VideoPlayerEvents.OnDisplayClickListener,
   LifecycleEventListener,
-  AudioManager.OnAudioFocusChangeListener
+  AudioManager.OnAudioFocusChangeListener,
 {
 
   //Props
@@ -46,11 +53,9 @@ public class ImpresaJwplayerView extends FrameLayout implements
   private String mediaId = "";
   private Double volume = 100D;
   private Boolean autostart = false;
-  private ReadableArray adSchedule = null;
-
+  private Activity currentActivity = null;
   private ReactContext reactContext;
-  private JWPlayerView mPlayerView;
-  private JWPlayerView mFullscreenPlayer;
+  private ImpresaJwplayerComponent mPlayerView;
   private PlaylistItem playListItem;
   private PlayerConfig config;
   private JWPlayer player;
@@ -63,11 +68,23 @@ public class ImpresaJwplayerView extends FrameLayout implements
   public ImpresaJwplayerView(Context context, Activity activity) {
     super(context);
     reactContext = (ReactContext) context;
+    currentActivity = activity;
+    mPlayerView = new ImpresaJwplayerComponent(activity);
 
-    FrameLayout jwPlayerLayout = (FrameLayout) activity.getLayoutInflater().inflate(R.layout.jwplayer_view, null);
-    this.addView(jwPlayerLayout);
+    Log.d("Rodrigo", "criando um novo component.");
 
-    mPlayerView = findViewById(R.id.jwplayer);
+    setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+    mPlayerView.setLayoutParams(new RelativeLayout.LayoutParams(
+      RelativeLayout.LayoutParams.MATCH_PARENT,
+      RelativeLayout.LayoutParams.MATCH_PARENT));
+
+    // Add the JWPlayerView to the screen. Make sure it's 16:9.
+    DisplayMetrics metrics = new DisplayMetrics();
+    activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+    ConstraintLayout jwPlayerLayout = (ConstraintLayout) currentActivity.getLayoutInflater().inflate(R.layout.jwplayer_view, null);
+    this.addView(mPlayerView, new ConstraintLayout.LayoutParams(
+      ViewGroup.LayoutParams.MATCH_PARENT, metrics.widthPixels / 16 * 9));
 
     player = mPlayerView.getPlayer();
 
@@ -76,11 +93,7 @@ public class ImpresaJwplayerView extends FrameLayout implements
       .build();
 
     player.setup(config);
-
-    player.setFullscreenHandler(new ImpresaFullScreenHandler(activity, (ViewGroup) mPlayerView.getParent(), mPlayerView));
-
     createListeners();
-
     reactContext.addLifecycleEventListener(this);
     player.allowBackgroundAudio(false);
     playListItem = new PlaylistItem.Builder().build();
@@ -148,7 +161,6 @@ public class ImpresaJwplayerView extends FrameLayout implements
   }
 
   public void setAdSchedule(ReadableArray adSchedule) {
-    this.adSchedule = adSchedule;
     List<AdBreak> ads = new ArrayList<>();
 
     for (int i = 0; i < adSchedule.size(); i++) {
@@ -167,6 +179,7 @@ public class ImpresaJwplayerView extends FrameLayout implements
     config = new PlayerConfig.Builder(config)
       .advertisingConfig(advertisingConfig)
       .build();
+    player.stop();
     player.setup(config);
   }
 
@@ -175,6 +188,7 @@ public class ImpresaJwplayerView extends FrameLayout implements
     config = new PlayerConfig.Builder(config)
       .autostart(autostart)
       .build();
+    player.stop();
     player.setup(config);
   }
 
@@ -190,6 +204,7 @@ public class ImpresaJwplayerView extends FrameLayout implements
     config = new PlayerConfig.Builder(config)
       .playlist(playlist)
       .build();
+    player.stop();
     player.setup(config);
   }
 
@@ -204,6 +219,7 @@ public class ImpresaJwplayerView extends FrameLayout implements
     config = new PlayerConfig.Builder(config)
       .playlist(playlist)
       .build();
+    player.stop();
     player.setup(config);
   }
 
@@ -219,6 +235,8 @@ public class ImpresaJwplayerView extends FrameLayout implements
     config = new PlayerConfig.Builder(config)
       .playlist(playlist)
       .build();
+
+    player.stop();
     player.setup(config);
   }
 
@@ -234,6 +252,8 @@ public class ImpresaJwplayerView extends FrameLayout implements
     config = new PlayerConfig.Builder(config)
       .playlist(playlist)
       .build();
+
+    player.stop();
     player.setup(config);
   }
 
@@ -249,6 +269,8 @@ public class ImpresaJwplayerView extends FrameLayout implements
     config = new PlayerConfig.Builder(config)
       .playlist(playlist)
       .build();
+
+    player.stop();
     player.setup(config);
   }
 
@@ -271,10 +293,14 @@ public class ImpresaJwplayerView extends FrameLayout implements
   @Override
   public void onFullscreen(FullscreenEvent fullscreenEvent) {
     String keyEvent = "";
+    ActionBar actionBar = currentActivity.getActionBar();
     if (fullscreenEvent.getFullscreen()) {
       keyEvent = "onFullScreen";
+      actionBar.hide();
     } else {
       keyEvent = "onFullScreenExit";
+      actionBar.show();
+      player.pause();
     }
 
     WritableMap event = Arguments.createMap();
@@ -318,10 +344,10 @@ public class ImpresaJwplayerView extends FrameLayout implements
 
   @Override
   public void onHostDestroy() {
-    Log.d("JwPlayer Impresa", "destroy");
     player.stop();
     removeListners();
     mPlayerView = null;
+    this.destroyPlayer();
   }
 
   @Override

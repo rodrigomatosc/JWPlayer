@@ -38,9 +38,7 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
     @Override
     @NonNull
     public ImpresaJwplayerView createViewInstance(ThemedReactContext reactContext) {
-      Log.d("Rodrigo", reactContext.getCurrentActivity().toString());
       ImpresaJwplayerView impresaJwplayerView = new ImpresaJwplayerView(reactContext, reactContext.getCurrentActivity());
-      reactContext.addLifecycleEventListener(impresaJwplayerView);
       return impresaJwplayerView;
     }
 
@@ -181,6 +179,7 @@ public class ImpresaJwplayerViewManager extends SimpleViewManager<ImpresaJwplaye
   public void destroy(ImpresaJwplayerView root) {
     if(root != null){
       root.destroyPlayer();
+      root.removeAllViews();
     }
   }
 }
