@@ -113,8 +113,7 @@ class ImpresaJwplayerViewBase : UIView {
             
             configBuilder.advertising(adConfig)
         }
-        catch {NSLog(error.localizedDescription)
-            NSLog("ERROOOOOO")
+        catch {
             NSLog(error.localizedDescription)
         }
     }
