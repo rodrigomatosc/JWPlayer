@@ -296,13 +296,19 @@ public class ImpresaJwplayerView extends ConstraintLayout implements
   @Override
   public void onFullscreen(FullscreenEvent fullscreenEvent) {
     String keyEvent = "";
-    ActionBar actionBar = currentActivity.getActionBar();
+    ActionBar actionBar = reactContext.getCurrentActivity().getActionBar();
     if (fullscreenEvent.getFullscreen()) {
       keyEvent = "onFullScreen";
-      actionBar.hide();
+
+      if(actionBar != null){
+        actionBar.hide();
+      }
+
     } else {
       keyEvent = "onFullScreenExit";
-      actionBar.show();
+      if(actionBar != null){
+        actionBar.show();
+      }
       player.pause();
     }
 
