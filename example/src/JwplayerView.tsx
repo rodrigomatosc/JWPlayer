@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import ImpresaJwplayerViewManager from 'react-native-impresa-jwplayer';
 
-// const TAG_ADS = 'https://playertest.longtailvideo.com/adtags/vmap2.xml';
+const TAG_ADS =
+  // 'https://playertest.longtailvideo.com/adtags/vmap2.xml';
+  'https://www8.smartadserver.com/ac?siteid=88991&pgid=618845&fmtid=37785&ab=1&tgt=__item-adServerTarget__&oc=1&out=vast3&ps=1&pb=6&visit=S&vcn=s&vpt=1&vpmt=1&tmstp=__timestamp__&vph=__player-height__&vpw=__player-width__&pgdomain=__domain__&gdpr_consent=__gdpr_consent__&gdpr=__gdpr__';
 const MEDIA_ID = 'Ngu7QHmj';
 const isIOS = Platform.OS == 'ios';
 const keyAndroid = 'vruEVPR8CLdvrqMOjBHcyKud1Z0jUAaz/0LQQKm6VBPE5ulk';
@@ -70,10 +72,10 @@ const JwPlayerView: React.FC = () => {
         file={file}
         imageFile={'http://d3el35u4qe4frz.cloudfront.net/bkaovAYt-480.jpg'}
         autostart={false}
-        // adSchedule={[
-        //   { tag: TAG_ADS, offset: 'pre' },
-        //   { tag: TAG_ADS, offset: '10' },
-        // ]}
+        adSchedule={[
+          { tag: TAG_ADS, offset: 'pre' },
+          { tag: TAG_ADS, offset: '10' },
+        ]}
         // volume={0}
         // onFullScreen={() => {
         //   Alert.alert('Teve fullscreen', 'fullscreen');

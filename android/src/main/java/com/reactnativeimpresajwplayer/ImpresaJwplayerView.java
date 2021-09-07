@@ -42,7 +42,7 @@ public class ImpresaJwplayerView extends ConstraintLayout implements
   VideoPlayerEvents.OnPauseListener,
   VideoPlayerEvents.OnDisplayClickListener,
   LifecycleEventListener,
-  AudioManager.OnAudioFocusChangeListener,
+  AudioManager.OnAudioFocusChangeListener
 {
 
   //Props

@@ -184,7 +184,7 @@ const WrapperJwPlayer: React.FC<ImpresaJwplayerProps> = React.forwardRef(
         }
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [ref]);
 
     /* @ts-ignore */
     return <ImpresaJwplayerComponent {...props} ref={ref} />;
