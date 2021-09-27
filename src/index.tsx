@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { createRef, useEffect, useImperativeHandle } from 'react';
 import {
   findNodeHandle,
@@ -5,6 +7,7 @@ import {
   UIManager,
   ViewStyle,
 } from 'react-native';
+import InViewPort from './InViewPort';
 
 type ImpresaJwplayerProps = {
   licenseKey?: string;
@@ -24,144 +27,65 @@ type ImpresaJwplayerProps = {
   mediaId?: string;
   title?: string;
   desc?: string;
+  playPauseWhenVisible?: boolean;
 };
 
 const JWPLAYER_TAG = 'ImpresaJwplayerView';
 export const ImpresaJwplayerComponent =
   requireNativeComponent<ImpresaJwplayerProps>(JWPLAYER_TAG);
-
-// export default class ImpresaJwplayerViewManager extends React.Component<ImpresaJwplayerProps> {
-//   constructor() {
-//     super();
-//     /* @ts-ignore */
-//     this.uiComponentRef = null;
-//     /* @ts-ignore */
-//     this.nativeCommands = UIManager.getViewManagerConfig(JWPLAYER_TAG).Commands;
-//   }
-
-//   static getDerivedStateFromProps(props, state) {
-//     console.log(props, state);
-//     return props;
-//   }
-
-//   componentDidMount() {
-//     console.log('comoponent novo');
-//   }
-
-//   play = () => {
-//     /* @ts-ignore */
-//     const playerNodeHandle = findNodeHandle(this.uiComponentRef.current);
-//     UIManager.dispatchViewManagerCommand(
-//       playerNodeHandle,
-//       /* @ts-ignore */
-//       this.nativeCommands.play,
-//       []
-//     );
-//   };
-
-//   pause = () => {
-//     /* @ts-ignore */
-//     const playerNodeHandle = findNodeHandle(this.uiComponentRef.current);
-//     UIManager.dispatchViewManagerCommand(
-//       playerNodeHandle,
-//       /* @ts-ignore */
-//       this.nativeCommands.pause,
-//       []
-//     );
-//   };
-
-//   toggleFullScreen = () => {
-//     /* @ts-ignore */
-//     const playerNodeHandle = findNodeHandle(this.uiComponentRef.current);
-//     UIManager.dispatchViewManagerCommand(
-//       playerNodeHandle,
-//       /* @ts-ignore */
-//       this.nativeCommands.toggleFullScreen,
-//       []
-//     );
-//   };
-
-//   destroy = () => {
-//     this.destroyPlayer();
-//   };
-
-//   destroyPlayer = () => {
-//     /* @ts-ignore */
-//     const playerNodeHandle = findNodeHandle(this.uiComponentRef.current);
-//     UIManager.dispatchViewManagerCommand(
-//       playerNodeHandle,
-//       /* @ts-ignore */
-//       this.nativeCommands.destroy,
-//       []
-//     );
-//   };
-
-//   render() {
-//     return (
-//       <ImpresaJwplayerComponent
-//         key={this.props.file}
-//         /* @ts-ignore */
-//         ref={(ref) => (this.uiComponentRef = ref)}
-//         {...this.props}
-//       />
-//     );
-//   }
-// }
-
 function ImpresaJwplayerViewManager(props: ImpresaJwplayerProps, ref: any) {
   const uiComponentRef = createRef();
   const nativeCommands = UIManager.getViewManagerConfig(JWPLAYER_TAG).Commands;
 
-  useImperativeHandle(ref, () => ({
-    play: () => {
-      /* @ts-ignore */
-      const playerNodeHandle = findNodeHandle(uiComponentRef.current);
-      UIManager.dispatchViewManagerCommand(
-        playerNodeHandle,
-        nativeCommands.play,
-        []
-      );
-    },
-    pause: () => {
-      /* @ts-ignore */
-      const playerNodeHandle = findNodeHandle(uiComponentRef.current);
-      UIManager.dispatchViewManagerCommand(
-        playerNodeHandle,
-        nativeCommands.pause,
-        []
-      );
-    },
-    toggleFullScreen: () => {
-      /* @ts-ignore */
-      const playerNodeHandle = findNodeHandle(uiComponentRef.current);
-      UIManager.dispatchViewManagerCommand(
-        playerNodeHandle,
-        nativeCommands.toggleFullScreen,
-        []
-      );
-    },
-    destroy: () => {
-      destroyPlayer();
-    },
-  }));
+  const sendCommand = (command) => {
+    const localNativeCommand = nativeCommands[command];
 
-  const destroyPlayer = () => {
+    if (localNativeCommand === undefined) {
+      return;
+    }
     /* @ts-ignore */
     const playerNodeHandle = findNodeHandle(uiComponentRef.current);
     UIManager.dispatchViewManagerCommand(
       playerNodeHandle,
-      nativeCommands.destroy,
+      localNativeCommand,
       []
     );
   };
 
+  useImperativeHandle(ref, () => ({
+    play: () => {
+      sendCommand('play');
+    },
+    pause: () => {
+      sendCommand('pause');
+    },
+    toggleFullScreen: () => {
+      sendCommand('toggleFullScreen');
+    },
+    destroy: () => {
+      sendCommand('destroy');
+    },
+  }));
+
   return (
-    <WrapperJwPlayer
-      key={props.file}
-      /* @ts-ignore */
-      ref={uiComponentRef}
-      {...props}
-    />
+    <InViewPort
+      disabled={!props.playPauseWhenVisible}
+      onChange={(isVisible) => {
+        if (props.playPauseWhenVisible) {
+          isVisible ? sendCommand('play') : sendCommand('pause');
+        }
+      }}
+    >
+      <WrapperJwPlayer
+        key={props.file}
+        /* @ts-ignore */
+        ref={uiComponentRef}
+        onDestroy={() => {
+          sendCommand('destroy');
+        }}
+        {...props}
+      />
+    </InViewPort>
   );
 }
 
@@ -185,8 +109,6 @@ const WrapperJwPlayer: React.FC<ImpresaJwplayerProps> = React.forwardRef(
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ref]);
-
-    /* @ts-ignore */
     return <ImpresaJwplayerComponent {...props} ref={ref} />;
   }
 );

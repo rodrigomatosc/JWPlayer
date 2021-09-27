@@ -55,17 +55,18 @@ import ImpresaJwplayer from 'react-native-impresa-jwplayer';
 
 ## Available props
 
-| Prop              | Description                      | Type                                     |
-| ----------------- | -------------------------------- | ---------------------------------------- |
-| **`mediaId`**     | The JW media id.                 | `Int`                                    |
-| **`file`**        | The url of the file to play.     | `String`                                 |
-| **`title`**       | The title of the track.          | `String`                                 |
-| **`imageFile`**   | The url of the player thumbnail. | `String`                                 |
-| **`autostart`**   | Should the track auto start.     | `Boolean`                                |
-| **`desc`**        | Description of the track.        | `String`                                 |
-| **`controls`**    | Should the control buttons show. | `Boolean`                                |
-| **`repeatVideo`** | Should the track repeat.         | `Boolean`                                |
-| **`adSchedule`**  | Array VAST ADS .                 | `Array<{ tag: String; offset: string }>` |
+| Prop                       | Description                                                                          | Type                                     |
+| -------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------- |
+| **`mediaId`**              | The JW media id.                                                                     | `Int`                                    |
+| **`file`**                 | The url of the file to play.                                                         | `String`                                 |
+| **`title`**                | The title of the track.                                                              | `String`                                 |
+| **`imageFile`**            | The url of the player thumbnail.                                                     | `String`                                 |
+| **`autostart`**            | Should the track auto start.                                                         | `Boolean`                                |
+| **`desc`**                 | Description of the track.                                                            | `String`                                 |
+| **`controls`**             | Should the control buttons show.                                                     | `Boolean`                                |
+| **`repeatVideo`**          | Should the track repeat.                                                             | `Boolean`                                |
+| **`adSchedule`**           | Array VAST ADS .                                                                     | `Array<{ tag: String; offset: string }>` |
+| **`playPauseWhenVisible`** | Similar to autostart but only call play/pause when the video is visible to the user. | `Boolean`                                |
 
 ## Available methods
 

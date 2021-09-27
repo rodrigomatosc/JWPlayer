@@ -71,8 +71,6 @@ public class ImpresaJwplayerView extends ConstraintLayout implements
     currentActivity = activity;
     mPlayerView = new ImpresaJwplayerComponent(activity);
 
-    Log.d("Rodrigo", "criando um novo component.");
-
     setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
     mPlayerView.setLayoutParams(new RelativeLayout.LayoutParams(
       RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -92,7 +90,7 @@ public class ImpresaJwplayerView extends ConstraintLayout implements
     new ImpresaKeepScreenOnHandler(player, activity.getWindow());
 
     config = new PlayerConfig.Builder()
-      .stretching(PlayerConfig.STRETCHING_UNIFORM)
+      .stretching(PlayerConfig.STRETCHING_EXACT_FIT)
       .build();
 
     player.setup(config);

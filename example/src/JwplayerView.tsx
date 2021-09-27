@@ -89,6 +89,7 @@ const JwPlayerView: React.FC = () => {
         // onPause={() => {
         //   Alert.alert('Pause', 'pause');
         // }}
+        playPauseWhenVisible={true}
       />
       <TouchableOpacity
         style={{
