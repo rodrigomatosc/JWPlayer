@@ -25,12 +25,13 @@
     "test": "jest",
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "cleanProject": "rm -rf node_modules && cd example && rm -rf node_modules && cd ios && rm -rf Pods && cd .. && cd ..",
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods",
-    "ci:build": "yarn && echo building..."
+    "ci:build": "yarn cleanProject && yarn && echo building..."
   },
   "keywords": [
     "react-native",
