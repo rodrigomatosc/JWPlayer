@@ -1,5 +1,5 @@
 {
-  "name": "react-native-impresa-jwplayer",
+  "name": "@impresa/react-native-impresa-jwplayer",
   "version": "0.1.29",
   "description": "jwplayer lib",
   "main": "lib/commonjs/index.js",
@@ -29,7 +29,8 @@
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "ci:build": "echo building..."
   },
   "keywords": [
     "react-native",
@@ -43,9 +44,6 @@
     "url": "https://impresa.pt/issues"
   },
   "homepage": "https://impresa.pt#readme",
-  "publishConfig": {
-    "registry": "https://repo.impresa.pt/nexus/repository/Impresa-npm-mobile-apps/"
-  },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
