@@ -30,7 +30,7 @@
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods",
-    "ci:build": "echo building..."
+    "ci:build": "yarn && echo building..."
   },
   "keywords": [
     "react-native",
