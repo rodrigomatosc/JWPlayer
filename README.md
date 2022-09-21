@@ -30,7 +30,7 @@ Insert the following lines inside the allProjects.dependencies block in `android
 ## Usage
 
 ```js
-import JwplayerViewManager from 'react-native-impresa-jwplayer';
+import JwplayerViewManager from 'react-native-jwplayer';
 
 // ...
 
