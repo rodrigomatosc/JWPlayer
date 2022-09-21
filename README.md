@@ -5,7 +5,7 @@ jwplayer lib
 ## Installation
 
 ```sh
-npm install react-native-impresa-jwplayer
+npm install react-native-jwplayer
 ```
 
 #### Add dependencies
@@ -30,23 +30,21 @@ Insert the following lines inside the allProjects.dependencies block in `android
 ## Usage
 
 ```js
-import ImpresaJwplayer from 'react-native-impresa-jwplayer';
+import JwplayerViewManager from 'react-native-impresa-jwplayer';
 
 // ...
 
-<ImpresaJwplayerViewManager
+<JwplayerViewManager
   licenseKey={'LICENSE_KEY'} // only android
   mediaId={'MEDIA_ID'}
   title={'TITLE'}
   desc={'DESCRIPTION'}
-  file={
-    'https://videos.impresa.pt/sicnot/2021-07-14/747de110-c364-44a7-8e1a-8d754e2d78b4_th-joc3a3o-paulo-gomes/playlist.m3u8'
-  }
-  imageFile={'http://d3el35u4qe4frz.cloudfront.net/bkaovAYt-480.jpg'}
+  file={''}
+  imageFile={''}
   autostart={false}
   adSchedule={[
     {
-      tag: 'https://playertest.longtailvideo.com/adtags/vmap2.xml',
+      tag: '',
       offset: 'pre',
     },
   ]}

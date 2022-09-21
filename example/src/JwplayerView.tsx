@@ -9,18 +9,13 @@ import {
 } from 'react-native';
 import ImpresaJwplayerViewManager from 'react-native-impresa-jwplayer';
 
-const TAG_ADS =
-  // 'https://playertest.longtailvideo.com/adtags/vmap2.xml';
-  'https://www8.smartadserver.com/ac?siteid=88991&pgid=618845&fmtid=37785&ab=1&tgt=__item-adServerTarget__&oc=1&out=vast3&ps=1&pb=6&visit=S&vcn=s&vpt=1&vpmt=1&tmstp=__timestamp__&vph=__player-height__&vpw=__player-width__&pgdomain=__domain__&gdpr_consent=__gdpr_consent__&gdpr=__gdpr__';
-const MEDIA_ID = 'Ngu7QHmj';
+const TAG_ADS ='';
+const MEDIA_ID = '';
 const isIOS = Platform.OS == 'ios';
-const keyAndroid = 'vruEVPR8CLdvrqMOjBHcyKud1Z0jUAaz/0LQQKm6VBPE5ulk';
-const keyIOS = 'S0rXXMtyuPqRWFL0tL+eYS+KzTazkNQJH5eed+1+gtxuHb2U';
+const keyAndroid = '';
+const keyIOS = '';
 
-const videos = [
-  'https://videos.impresa.pt/sicnot/2021-07-14/747de110-c364-44a7-8e1a-8d754e2d78b4_th-joc3a3o-paulo-gomes/playlist.m3u8',
-  'https://live.impresa.pt/live/sic/sic.m3u8',
-];
+const videos = [];
 
 const JwPlayerView: React.FC = () => {
   const jwRef = React.useRef();
@@ -35,29 +30,6 @@ const JwPlayerView: React.FC = () => {
     }, [jwRef])
   );
 
-  React.useEffect(() => {
-    // setInterval(() => {
-    //   videos.forEach((video) => {
-    //     if (video !== file) {
-    //       setFile(video);
-    //       console.log('trocou', file, video);
-    //     }
-    //   });
-    // }, 5000);
-    // setTimeout(() => {
-    //   /* @ts-ignore */
-    //   jwRef.current?.play();
-    // }, 3000);
-    // setTimeout(() => {
-    //   /* @ts-ignore */
-    //   jwRef.current?.pause();
-    // }, 6000);
-    // setTimeout(() => {
-    //   /* @ts-ignore */
-    //   jwRef.current?.toggleFullScreen();
-    // }, 8000);
-  }, []);
-
   return (
     <View style={styles.container}>
       <ImpresaJwplayerViewManager
@@ -65,12 +37,12 @@ const JwPlayerView: React.FC = () => {
         ref={jwRef}
         style={styles.box}
         mediaId={MEDIA_ID}
-        title={'JWPLAYER IMPRESA'}
+        title={'JWPLAYER'}
         desc={
           'Vestibulum accumsan, arcu ut finibus posuere, leo lacus finibus neque, sed molestie metus justo eget augue'
         }
         file={file}
-        imageFile={'http://d3el35u4qe4frz.cloudfront.net/bkaovAYt-480.jpg'}
+        imageFile={''}
         autostart={false}
         adSchedule={[
           { tag: TAG_ADS, offset: 'pre' },
