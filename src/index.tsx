@@ -30,7 +30,7 @@ type ImpresaJwplayerProps = {
   playPauseWhenVisible?: boolean;
 };
 
-const JWPLAYER_TAG = 'ImpresaJwplayerView';
+const JWPLAYER_TAG = 'JwplayerView';
 export const ImpresaJwplayerComponent =
   requireNativeComponent<ImpresaJwplayerProps>(JWPLAYER_TAG);
 function ImpresaJwplayerViewManager(props: ImpresaJwplayerProps, ref: any) {
