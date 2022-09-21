@@ -1,4 +1,4 @@
-# react-native-impresa-jwplayer
+# react-native-jwplayer
 
 jwplayer lib
 
